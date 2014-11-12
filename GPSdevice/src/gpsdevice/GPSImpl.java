@@ -1,8 +1,10 @@
 package gpsdevice;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import peta.Graph;
+import peta.Lokasi;
 import gps.GPS;
 import peta.*;
 
@@ -12,7 +14,7 @@ public class GPSImpl implements GPS {
 	@Override
 	public String getCurrentPosition() {
 		// TODO Auto-generated method stub
-		return null;
+		return currentPosition.getKordinat();
 	}
 
 	@Override
@@ -61,8 +63,21 @@ public class GPSImpl implements GPS {
 
 	@Override
 	public String move() {
+		Random rand = new Random();
+		boolean val = rand.nextInt(2)==0;
+		//kemungkinan 50% diam ditempat, selain itu bergerak ketempat lain
+		if(val==true)
+		{
+			ArrayList<Lokasi> tetangga= peta.getTetangga(currentPosition);
+			currentPosition = tetangga.get(rand.nextInt(tetangga.size()));
+		}
+		return currentPosition.getKordinat();
+	}
+
+	@Override
+	public Lokasi getObjectLokasi() {
 		// TODO Auto-generated method stub
-		return null;
+		return currentPosition;
 	}
 
 }
