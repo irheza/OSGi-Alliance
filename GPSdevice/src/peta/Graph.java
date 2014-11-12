@@ -9,11 +9,13 @@ public class Graph {
 	public Graph(ArrayList<Lokasi> vertex)
 	{
 		this.vertex = vertex;
+		listedge = new ArrayList<Edge>();
 	}
 	
-	public void addEdge(Edge x)
+	public void addEdge(Lokasi a, Lokasi b)
 	{
-		listedge.add(x);
+		Edge tmp = new Edge(a,b);
+		listedge.add(tmp);
 	}
 	
 	public ArrayList<Edge> getListEdge()
@@ -44,5 +46,27 @@ public class Graph {
 		}
 		return tetangga;
 	}
+}
+
+class Edge {
+	public Lokasi left;
+	public Lokasi right;
+	
+	public Edge(Lokasi left, Lokasi right){
+		this.left = left;
+		this.right = right;
+		
+	}
+	
+	public Lokasi getLeft()
+	{
+		return this.left;
+	}
+	
+	public Lokasi getRight()
+	{
+		return this.right;
+	}
+
 }
 

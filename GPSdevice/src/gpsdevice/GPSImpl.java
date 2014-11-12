@@ -11,6 +11,10 @@ import peta.*;
 public class GPSImpl implements GPS {
 	Lokasi currentPosition;
 	Graph peta;
+	public GPSImpl()
+	{
+		
+	}
 	@Override
 	public String getCurrentPosition() {
 		// TODO Auto-generated method stub
@@ -39,24 +43,15 @@ public class GPSImpl implements GPS {
 		listLokasi.add(h);
 		listLokasi.add(i);
 		peta = new Graph(listLokasi);
-		Edge e1 = new Edge(a,b);
-		Edge e2 = new Edge(a,d);
-		Edge e3 = new Edge(b,e);
-		Edge e4 = new Edge(c,d);
-		Edge e5 = new Edge(d,e);
-		Edge e6 = new Edge(e,f);
-		Edge e7 = new Edge(f,g);
-		Edge e8 = new Edge(f,i);
-		Edge e9 = new Edge(h,i);
-		peta.addEdge(e1);
-		peta.addEdge(e2);
-		peta.addEdge(e3);
-		peta.addEdge(e4);
-		peta.addEdge(e5);
-		peta.addEdge(e6);
-		peta.addEdge(e7);
-		peta.addEdge(e8);
-		peta.addEdge(e9);
+		peta.addEdge(a,b);
+		peta.addEdge(a,d);
+		peta.addEdge(b,e);
+		peta.addEdge(c,d);
+		peta.addEdge(d,e);
+		peta.addEdge(e,f);
+		peta.addEdge(f,g);
+		peta.addEdge(f,i);
+		peta.addEdge(h,i);
 		currentPosition = a;
 
 	}
