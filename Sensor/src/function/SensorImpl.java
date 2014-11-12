@@ -17,6 +17,7 @@ public class SensorImpl implements Sensor {
 	
 	@Override
 	public String getCuaca() {
+		System.out.println("hello");
 		return listCuaca[randInt(0,2)];
 	}
 	
