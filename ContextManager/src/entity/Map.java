@@ -16,11 +16,12 @@ public class Map {
     private Hashtable<String, ArrayList<PlaceOfInterest>> places;
     private BufferedReader reader;
     private String mapLocation = "";
-    final static int ROW_INDEX = 0;
-    final static int COL_INDEX = 1;
-    final static int LOCATION_INDEX = 2;
-    final static int NAME_INDEX = 3;
-    final static int INFORMATION_INDEX = 4;
+    final static int ID_INDEX = 0;
+    final static int ROW_INDEX = 1;
+    final static int COL_INDEX = 2;
+    final static int LOCATION_INDEX = 3;
+    final static int NAME_INDEX = 4;
+    final static int INFORMATION_INDEX = 5;
     
     public Map(String mapLocation) {
         this.mapLocation = mapLocation;
@@ -48,11 +49,12 @@ public class Map {
     private void parseMapLine(String line) {
         String[] str = line.split(",");
         if (str.length >= 5) {
+        	String id = str[ID_INDEX];
             int row = Integer.parseInt(str[ROW_INDEX]);
             int col = Integer.parseInt(str[COL_INDEX]);
             String location = str[LOCATION_INDEX];
 
-            PlaceOfInterest poi = new PlaceOfInterest(row, col, str[NAME_INDEX], location, str[INFORMATION_INDEX]);
+            PlaceOfInterest poi = new PlaceOfInterest(id, row, col, str[NAME_INDEX], location, str[INFORMATION_INDEX]);
             ArrayList<String> services = new ArrayList<String>();
             for (int i = 5; i < str.length; i++) {
                 services.add(str[i]);
@@ -68,6 +70,17 @@ public class Map {
     
     public ArrayList<PlaceOfInterest> getByLocation(String location){
         return places.get(location);
+    }
+    
+    public PlaceOfInterest getByID(String id){
+    	for(ArrayList<PlaceOfInterest> pois : places.values()){
+    		for(int i=0;i<pois.size();i++){
+    			if(pois.get(i).getId().equals(id)){
+    				return pois.get(i);
+    			}
+    		}
+    	}
+    	return null;
     }
     
     public static String getCompassDirective(PlaceOfInterest from, PlaceOfInterest to){

@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * @author Johanes
  */
 public class PlaceOfInterest {
+	private String id;
     private String name;
     private String location;
     private String information;
@@ -19,15 +20,23 @@ public class PlaceOfInterest {
     private int row;
     private int col;
 
-    public PlaceOfInterest(int row, int col, String name, String location, String information) {
+    public PlaceOfInterest(String id, int row, int col, String name, String location, String information) {
         this.row = row;
         this.col = col;
         this.name = name;
         this.location = location;
         this.information = information;
     }
+    
+    public String getId() {
+		return id;
+	}
 
-    public String getName() {
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getName() {
         return name;
     }
 
