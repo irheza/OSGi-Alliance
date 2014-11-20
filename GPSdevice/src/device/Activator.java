@@ -20,11 +20,9 @@ public class Activator implements BundleActivator {
 	final int INFO_TEMPAT_MENARIK = 1;
 	final int TEMPAT_MENARIK_LOKASI_SKRG = 2;
 	final int PETUNJUK_ARAH = 3;
-<<<<<<< HEAD
 
-=======
+	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	Thread gpsFetcher;
->>>>>>> branch 'master' of https://github.com/irheza/OSGi-Alliance.git
 	ServiceReference contextmanagerServiceReference;
 	private static BundleContext context;
 	GPS gps;
@@ -51,7 +49,7 @@ public class Activator implements BundleActivator {
 		System.out.println("E. Exit");
 		gps = new GPSImpl();
 		gps.start();
-<<<<<<< HEAD
+
 		BufferedReader reader = new BufferedReader(new InputStreamReader(
 				System.in));
 		int mode = Integer.parseInt(reader.readLine().trim());
@@ -76,31 +74,16 @@ public class Activator implements BundleActivator {
 			for (int i = 0; i < pois.size(); i++) {
 				System.out
 						.printf("%d NAMA: %s\n", i + 1, pois.get(i).getName());
-=======
-		gpsFetcher = new Thread(new GPSFetcher(bundleContext, gps));
-		gpsFetcher.start();
-		Scanner input = new Scanner(System.in);
-		int mode = Integer.parseInt(input.next().trim());
-		
-		if(mode == INFO_TEMPAT_MENARIK)
-		{
-			contextmanagerServiceReference= bundleContext.getServiceReference(ContextManager.class.getName());
-		    ContextManager contextManagerService =(ContextManager)bundleContext.getService(contextmanagerServiceReference);
-			System.out.println("Lokasi dari contextManager: "+contextManagerService.getCurrentLocationPosition());
-		}else if(mode == TEMPAT_MENARIK_LOKASI_SKRG){
-			ArrayList<PlaceOfInterest> pois = gps.getCurrentLocationPOI(bundleContext, contextmanagerServiceReference);
-			
-			for(int i = 0; i<pois.size();i++){
-				System.out.printf("%d NAMA: %s\n", i+1, pois.get(i).getName());
->>>>>>> branch 'master' of https://github.com/irheza/OSGi-Alliance.git
+				gpsFetcher = new Thread(new GPSFetcher(bundleContext, gps));
+				gpsFetcher.start();
+
+				System.out.println("pilih poi: ");
+				int poiSelected = Integer.parseInt(reader.readLine().trim()) - 1;
+
+				PlaceOfInterest poi = pois.get(poiSelected);
+
+				System.out.println(poi.toString());
 			}
-
-			System.out.println("pilih poi: ");
-			int poiSelected = Integer.parseInt(reader.readLine().trim()) - 1;
-
-			PlaceOfInterest poi = pois.get(poiSelected);
-
-			System.out.println(poi.toString());
 		} else if (mode == PETUNJUK_ARAH) {
 			System.out.println("sebut nama tempat yang mau dicari:");
 
