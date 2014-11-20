@@ -1,12 +1,9 @@
-package gpsdevice;
+package gps;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import peta.Graph;
-import peta.Lokasi;
-import gps.GPS;
-import peta.*;
+import map.*;
 
 public class GPSImpl implements GPS {
 	Lokasi currentPosition;

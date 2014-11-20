@@ -1,4 +1,6 @@
-package gpsdevice;
+package device;
+
+import gps.GPSImpl;
 
 import java.util.Scanner;
 
@@ -11,6 +13,11 @@ import contextmanager.ContextManager;
 
 
 public class Activator implements BundleActivator {
+	final int INFO_TEMPAT_MENARIK = 1;
+	final int TEMPAT_MENARIK_LOKASI_SKRG = 2;
+	final int PETUNJUK_ARAH = 3;
+	
+	
 	ServiceReference contextmanagerServiceReference;
 	private static BundleContext context;
 	GPSImpl gps;
@@ -34,7 +41,9 @@ public class Activator implements BundleActivator {
 		gps = new GPSImpl();
 		gps.start();
 		Scanner input = new Scanner(System.in);
-		if(input.next().equalsIgnoreCase("1"))
+		int mode = Integer.parseInt(input.next().trim());
+		
+		if(mode == INFO_TEMPAT_MENARIK)
 		{
 			gps.move();
 			gps.move();
@@ -44,6 +53,10 @@ public class Activator implements BundleActivator {
 			contextmanagerServiceReference= bundleContext.getServiceReference(ContextManager.class.getName());
 		    ContextManager contextManagerService =(ContextManager)bundleContext.getService(contextmanagerServiceReference);
 			System.out.println("Lokasi dari contextManager: "+contextManagerService.getCurrentLocationPosition());
+		}else if(mode == TEMPAT_MENARIK_LOKASI_SKRG){
+			
+		}else if(mode == PETUNJUK_ARAH){
+			
 		}
 		
 		

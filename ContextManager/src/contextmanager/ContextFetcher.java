@@ -14,6 +14,7 @@ public class ContextFetcher implements Runnable {
 	public ContextFetcher(BundleContext bundleContext, ContextManager contextManager){
 		sensorServiceReference= bundleContext.getServiceReference(Sensor.class.getName());
 	    sensorService =(Sensor)bundleContext.getService(sensorServiceReference);   
+	    this.contextManager = contextManager;
 	}
 	
 	@Override

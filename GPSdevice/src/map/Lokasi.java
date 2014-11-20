@@ -1,4 +1,4 @@
-package peta;
+package map;
 
 public class Lokasi {
 	String kordinat;

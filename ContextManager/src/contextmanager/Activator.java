@@ -26,6 +26,7 @@ public class Activator implements BundleActivator {
 
 		contextFetcher = new Thread(new ContextFetcher(context, server));
 		contextFetcher.start();
+		
 		ContextManager contextService = new ContextManagerImpl();
 		contextServiceRegistration = context.registerService(
 				ContextManager.class.getName(), contextService, null);
