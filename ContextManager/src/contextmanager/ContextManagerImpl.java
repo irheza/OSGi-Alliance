@@ -4,25 +4,67 @@ import java.util.ArrayList;
 
 import entity.Map;
 import entity.PlaceOfInterest;
+import entity.RowColLocation;
 
-public class ContextManagerImpl implements ContextManager{
-	Map map = new Map("map.csv");
+public class ContextManagerImpl implements ContextManager {
+	Map map;
+	private int suhu;
+	private String cuaca;
+	private String time;
+
+	public ContextManagerImpl() {
+		map = new Map("map.csv");
+	}
+
+	private String currentLocation;
+
 	@Override
 	public ArrayList<PlaceOfInterest> getCurrentLocationInfo(String location) {
-		// TODO Auto-generated method stub
-		return null;
+		return map.getByLocation(location);
+	}
+
+	public void setSuhu(int suhu) {
+		this.suhu = suhu;
+	}
+
+	public void setCuaca(String cuaca) {
+		this.cuaca = cuaca;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	public String setCurrentLocation(String location) {
+		this.currentLocation = location;
+		return location;
 	}
 
 	@Override
 	public PlaceOfInterest getSinglePOI(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return map.getByID(id);
 	}
 
 	@Override
 	public String getCompassDirective(PlaceOfInterest from, PlaceOfInterest to) {
-		// TODO Auto-generated method stub
+		return map.getCompassDirective(from, to);
+	}
+
+	@Override
+	public String getCurrentLocationPosition() {
+		return currentLocation;
+	}
+
+	public String getCompassDirective(RowColLocation from, PlaceOfInterest to) {
+		if (to != null) {
+			return map.getCompassDirective(from, to);
+		}
 		return null;
+	}
+
+	@Override
+	public PlaceOfInterest getByName(String name) {
+		return map.getByName(name);
 	}
 
 }
