@@ -11,13 +11,14 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
+import contextmanager.ContextFetcher;
 import contextmanager.ContextManager;
 
 public class Activator implements BundleActivator {
 	final int INFO_TEMPAT_MENARIK = 1;
 	final int TEMPAT_MENARIK_LOKASI_SKRG = 2;
 	final int PETUNJUK_ARAH = 3;
-	
+	Thread gpsFetcher;
 	ServiceReference contextmanagerServiceReference;
 	private static BundleContext context;
 	GPS gps;
@@ -40,16 +41,13 @@ public class Activator implements BundleActivator {
 		System.out.println("E. Exit");
 		gps = new GPSImpl();
 		gps.start();
+		gpsFetcher = new Thread(new GPSFetcher(bundleContext, gps));
+		gpsFetcher.start();
 		Scanner input = new Scanner(System.in);
 		int mode = Integer.parseInt(input.next().trim());
 		
 		if(mode == INFO_TEMPAT_MENARIK)
 		{
-			gps.move();
-			gps.move();
-			gps.move();
-			gps.move();
-			gps.sendCurrentLocation(bundleContext, contextmanagerServiceReference);
 			contextmanagerServiceReference= bundleContext.getServiceReference(ContextManager.class.getName());
 		    ContextManager contextManagerService =(ContextManager)bundleContext.getService(contextmanagerServiceReference);
 			System.out.println("Lokasi dari contextManager: "+contextManagerService.getCurrentLocationPosition());
