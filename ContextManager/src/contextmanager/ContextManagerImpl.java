@@ -10,6 +10,7 @@ public class ContextManagerImpl implements ContextManager{
 	private int suhu;
 	private String cuaca;
 	private String time;
+	private String currentLocation;
 	@Override
 	public ArrayList<PlaceOfInterest> getCurrentLocationInfo(String location) {
 		// TODO Auto-generated method stub
@@ -30,6 +31,13 @@ public class ContextManagerImpl implements ContextManager{
 	{
 		this.time=time;
 	}
+	
+	public String setCurrentLocation(String location)
+	{
+		this.currentLocation = location;
+		return location;
+	}
+	
 
 	@Override
 	public PlaceOfInterest getSinglePOI(String id) {

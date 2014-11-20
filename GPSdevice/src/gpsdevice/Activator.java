@@ -2,11 +2,16 @@ package gpsdevice;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
+
+import contextmanager.ContextManager;
+
+
 
 public class Activator implements BundleActivator {
-
+	ServiceReference contextmanagerServiceReference;
 	private static BundleContext context;
-
+	GPSImpl gps;
 	static BundleContext getContext() {
 		return context;
 	}
@@ -24,7 +29,7 @@ public class Activator implements BundleActivator {
 		System.out.println("2. Cari tempat menarik di lokasi sekarang");
 		System.out.println("3. Berikan petunjuk arah menuju sebuah tempat");
 		System.out.println("E. Exit");
-		GPSImpl gps = new GPSImpl();
+		gps = new GPSImpl();
 		gps.start();
 		while(true)
 		{
@@ -41,6 +46,12 @@ public class Activator implements BundleActivator {
 	 */
 	public void stop(BundleContext bundleContext) throws Exception {
 		Activator.context = null;
+	}
+	
+	public void sentCurrentLocation(BundleContext bundleContext){
+		contextmanagerServiceReference= bundleContext.getServiceReference(ContextManager.class.getName());
+	    ContextManager contextManagerService =(ContextManager)bundleContext.getService(contextmanagerServiceReference);
+	    contextManagerService.setCurrentLocation(gps.getCurrentPosition());
 	}
 
 }
