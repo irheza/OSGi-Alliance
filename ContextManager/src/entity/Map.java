@@ -40,9 +40,9 @@ public class Map {
                 parseMapLine(line);
             }
         } catch (FileNotFoundException ex) {
-
+        	ex.printStackTrace();
         } catch (IOException ioex) {
-
+        	ioex.printStackTrace();
         }
     }
 
@@ -63,8 +63,6 @@ public class Map {
             ArrayList<PlaceOfInterest> currPlaces = places.get(location);
             currPlaces.add(poi);
             places.put(location, currPlaces);
-            
-            System.out.println(poi.toString());
         }
     }
     

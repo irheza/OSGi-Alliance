@@ -6,15 +6,19 @@ import entity.Map;
 import entity.PlaceOfInterest;
 
 public class ContextManagerImpl implements ContextManager{
-	Map map = new Map("map.csv");
+	Map map;
 	private int suhu;
 	private String cuaca;
 	private String time;
+	
+	public ContextManagerImpl() {
+		map = new Map("map.csv");
+	}
 	private String currentLocation;
+	
 	@Override
 	public ArrayList<PlaceOfInterest> getCurrentLocationInfo(String location) {
-		// TODO Auto-generated method stub
-		return null;
+		return map.getByLocation(location);
 	}
 	
 	public void setSuhu(int suhu)
@@ -41,14 +45,12 @@ public class ContextManagerImpl implements ContextManager{
 
 	@Override
 	public PlaceOfInterest getSinglePOI(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return map.getByID(id);
 	}
 
 	@Override
 	public String getCompassDirective(PlaceOfInterest from, PlaceOfInterest to) {
-		// TODO Auto-generated method stub
-		return null;
+		return map.getCompassDirective(from, to);
 	}
 
 	@Override
