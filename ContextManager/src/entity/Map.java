@@ -16,6 +16,8 @@ public class Map {
     private Hashtable<String, ArrayList<PlaceOfInterest>> places;
     private BufferedReader reader;
     private String mapLocation = "";
+    private Hashtable<String, RowColLocation> locDef;
+    
     final static int ID_INDEX = 0;
     final static int ROW_INDEX = 1;
     final static int COL_INDEX = 2;
@@ -44,6 +46,18 @@ public class Map {
         } catch (IOException ioex) {
         	ioex.printStackTrace();
         }
+        
+        locDef = new Hashtable<String, RowColLocation>(); 
+        locDef.put("A", new RowColLocation(0,1));
+        locDef.put("B", new RowColLocation(0,2));
+        locDef.put("C", new RowColLocation(1,0));
+        locDef.put("D", new RowColLocation(1,1));
+        locDef.put("E", new RowColLocation(1,2));
+        locDef.put("F", new RowColLocation(2,2));
+        locDef.put("G", new RowColLocation(2,3));
+        locDef.put("H", new RowColLocation(3,1));
+        locDef.put("I", new RowColLocation(3,2));
+        
     }
 
     private void parseMapLine(String line) {
@@ -79,6 +93,50 @@ public class Map {
     		}
     	}
     	return null;
+    }
+    
+    public PlaceOfInterest getByName(String name){
+    	for(ArrayList<PlaceOfInterest> pois : places.values()){
+    		for(int i=0;i<pois.size();i++){
+    			if(pois.get(i).getName().equalsIgnoreCase(name)){
+    				return pois.get(i);
+    			}
+    		}
+    	}
+    	return null;
+    }
+    
+    public static String getCompassDirective(RowColLocation from, PlaceOfInterest to){
+        if(from.getRow()==to.getRow()){
+            if(from.getCol()>to.getCol()){
+                return "UTARA";
+            }else if(from.getCol()<to.getCol()){
+                return "SELATAN";
+            }else{
+                return "POSISI SAMA";
+            }
+        }else if(from.getCol()==to.getCol()){
+            if(from.getRow()>to.getRow()){
+                return "TIMUR";
+            }else if(from.getRow()<to.getRow()){
+                return "BARAT";
+            }else{
+                return "POSISI SAMA";
+            }
+        }else if(from.getCol()>to.getCol()){
+            if(from.getRow()>to.getRow()){
+                return "BARAT LAUT";
+            }else{
+                return "BARAT DAYA";
+            }
+        }else if(from.getCol()<to.getCol()){
+            if(from.getRow()>to.getRow()){
+                return "TIMUR LAUT";
+            }else{
+                return "TENGGARA";
+            }
+        }
+        return null;
     }
     
     public static String getCompassDirective(PlaceOfInterest from, PlaceOfInterest to){

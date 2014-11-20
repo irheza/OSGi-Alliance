@@ -15,4 +15,5 @@ public interface GPS {
 	public Location getObjectLokasi();
 	public void sendCurrentLocation(BundleContext bundleContext, ServiceReference<?> contextmanagerServiceReference);
 	public ArrayList<PlaceOfInterest> getCurrentLocationPOI(BundleContext bundleContext, ServiceReference<?> contextmanagerServiceReference);
+	public String getCompassDirective(BundleContext bundleContext, ServiceReference<?> contextmanagerServiceReference, String to);
 }

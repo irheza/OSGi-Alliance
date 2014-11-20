@@ -1,6 +1,7 @@
 package gps;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Random;
 
 import org.osgi.framework.BundleContext;
@@ -8,18 +9,35 @@ import org.osgi.framework.ServiceReference;
 
 import contextmanager.ContextManager;
 import entity.PlaceOfInterest;
+import entity.RowColLocation;
 import map.*;
 
 public class GPSImpl implements GPS {
 	Location currentPosition;
 	Graph peta;
-
+    private Hashtable<String, RowColLocation> locDef;
+    
+    public GPSImpl(){
+    	locDef = new Hashtable<String, RowColLocation>(); 
+        locDef.put("A", new RowColLocation(0,1));
+        locDef.put("B", new RowColLocation(0,2));
+        locDef.put("C", new RowColLocation(1,0));
+        locDef.put("D", new RowColLocation(1,1));
+        locDef.put("E", new RowColLocation(1,2));
+        locDef.put("F", new RowColLocation(2,2));
+        locDef.put("G", new RowColLocation(2,3));
+        locDef.put("H", new RowColLocation(3,1));
+        locDef.put("I", new RowColLocation(3,2));
+    }
+    
 	@Override
 	public String getCurrentPosition() {
 		// TODO Auto-generated method stub
 		return currentPosition.getKordinat();
 	}
-
+	
+	
+	
 	@Override
 	public void start() {
 		ArrayList<Location> listLokasi = new ArrayList<Location>();
@@ -52,7 +70,8 @@ public class GPSImpl implements GPS {
 		peta.addEdge(f, i);
 		peta.addEdge(h, i);
 		currentPosition = a;
-
+		
+		
 	}
 
 	@Override
@@ -92,6 +111,20 @@ public class GPSImpl implements GPS {
 				.getService(contextmanagerServiceReference);
 		return contextManagerService
 				.getCurrentLocationInfo(getCurrentPosition());
+	}
+
+	@Override
+	public String getCompassDirective(
+			BundleContext bundleContext,
+			ServiceReference<?> contextmanagerServiceReference, String to) {
+		contextmanagerServiceReference = bundleContext
+				.getServiceReference(ContextManager.class.getName());
+		ContextManager contextManagerService = (ContextManager) bundleContext
+				.getService(contextmanagerServiceReference);
+		
+		System.out.println("CURRENT POSITION: "+locDef.get(currentPosition.getKordinat()));
+		
+		return contextManagerService.getCompassDirective(locDef.get(currentPosition.getKordinat()), contextManagerService.getByName(to));
 	}
 
 }
