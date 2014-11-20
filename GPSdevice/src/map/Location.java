@@ -1,9 +1,9 @@
 package map;
 
-public class Lokasi {
+public class Location {
 	String kordinat;
 	
-	public Lokasi(String kordinat)
+	public Location(String kordinat)
 	{
 		this.kordinat = kordinat;
 	}

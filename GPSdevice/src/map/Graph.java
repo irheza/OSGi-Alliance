@@ -3,16 +3,16 @@ package map;
 import java.util.ArrayList;
 
 public class Graph {
-	ArrayList<Lokasi> vertex;
+	ArrayList<Location> vertex;
 	ArrayList<Edge> listedge;
 	
-	public Graph(ArrayList<Lokasi> vertex)
+	public Graph(ArrayList<Location> vertex)
 	{
 		this.vertex = vertex;
 		listedge = new ArrayList<Edge>();
 	}
 	
-	public void addEdge(Lokasi a, Lokasi b)
+	public void addEdge(Location a, Location b)
 	{
 		Edge tmp = new Edge(a,b);
 		listedge.add(tmp);
@@ -23,18 +23,18 @@ public class Graph {
 		return listedge;
 	}
 	
-	public ArrayList<Lokasi> getListLokasi()
+	public ArrayList<Location> getListLokasi()
 	{
 		return vertex;
 	}
 	
-	public ArrayList<Lokasi> getTetangga(Lokasi input)
+	public ArrayList<Location> getTetangga(Location input)
 	{
-		ArrayList<Lokasi> tetangga = new ArrayList<Lokasi>();
+		ArrayList<Location> tetangga = new ArrayList<Location>();
 		for(Edge edge : listedge)
 		{
-			Lokasi a = edge.getLeft();
-			Lokasi b = edge.getRight();
+			Location a = edge.getLeft();
+			Location b = edge.getRight();
 			if(input.getKordinat().equals(a.getKordinat()) )
 			{
 				tetangga.add(b);
@@ -49,21 +49,21 @@ public class Graph {
 }
 
 class Edge {
-	public Lokasi left;
-	public Lokasi right;
+	public Location left;
+	public Location right;
 	
-	public Edge(Lokasi left, Lokasi right){
+	public Edge(Location left, Location right){
 		this.left = left;
 		this.right = right;
 		
 	}
 	
-	public Lokasi getLeft()
+	public Location getLeft()
 	{
 		return this.left;
 	}
 	
-	public Lokasi getRight()
+	public Location getRight()
 	{
 		return this.right;
 	}

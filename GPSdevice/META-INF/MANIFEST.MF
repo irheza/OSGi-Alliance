@@ -6,4 +6,5 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: device.Activator
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: contextmanager,
+ entity,
  org.osgi.framework;version="1.3.0"

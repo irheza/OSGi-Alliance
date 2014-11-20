@@ -40,9 +40,9 @@ public class Map {
                 parseMapLine(line);
             }
         } catch (FileNotFoundException ex) {
-
+        	ex.printStackTrace();
         } catch (IOException ioex) {
-
+        	ioex.printStackTrace();
         }
     }
 

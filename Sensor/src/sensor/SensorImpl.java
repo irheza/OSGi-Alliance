@@ -1,10 +1,8 @@
-package function;
+package sensor;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Random;
-
-import sensor.Sensor;
 
 public class SensorImpl implements Sensor {
 
@@ -17,7 +15,6 @@ public class SensorImpl implements Sensor {
 	
 	@Override
 	public String getCuaca() {
-		System.out.println("hello");
 		return listCuaca[randInt(0,2)];
 	}
 	

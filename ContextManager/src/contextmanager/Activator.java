@@ -21,7 +21,6 @@ public class Activator implements BundleActivator {
 	 * )
 	 */
 	public void start(BundleContext context) throws Exception {
-		System.out.println("Hello World!!");
 		server = new ContextManagerImpl();
 
 		contextFetcher = new Thread(new ContextFetcher(context, server));
@@ -40,7 +39,6 @@ public class Activator implements BundleActivator {
 	 * org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
-		System.out.println("Goodbye World!!");
 		contextServiceRegistration.unregister();
 	}
 }

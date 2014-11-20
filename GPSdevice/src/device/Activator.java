@@ -1,7 +1,9 @@
 package device;
 
-import gps.GPSImpl;
+import entity.PlaceOfInterest;
+import gps.*;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.osgi.framework.BundleActivator;
@@ -10,17 +12,14 @@ import org.osgi.framework.ServiceReference;
 
 import contextmanager.ContextManager;
 
-
-
 public class Activator implements BundleActivator {
 	final int INFO_TEMPAT_MENARIK = 1;
 	final int TEMPAT_MENARIK_LOKASI_SKRG = 2;
 	final int PETUNJUK_ARAH = 3;
 	
-	
 	ServiceReference contextmanagerServiceReference;
 	private static BundleContext context;
-	GPSImpl gps;
+	GPS gps;
 	static BundleContext getContext() {
 		return context;
 	}
@@ -49,12 +48,15 @@ public class Activator implements BundleActivator {
 			gps.move();
 			gps.move();
 			gps.move();
-			sentCurrentLocation(bundleContext);
+			gps.sendCurrentLocation(bundleContext, contextmanagerServiceReference);
 			contextmanagerServiceReference= bundleContext.getServiceReference(ContextManager.class.getName());
 		    ContextManager contextManagerService =(ContextManager)bundleContext.getService(contextmanagerServiceReference);
 			System.out.println("Lokasi dari contextManager: "+contextManagerService.getCurrentLocationPosition());
 		}else if(mode == TEMPAT_MENARIK_LOKASI_SKRG){
-			
+			ArrayList<PlaceOfInterest> pois = gps.getCurrentLocationPOI(bundleContext, contextmanagerServiceReference);
+			for(PlaceOfInterest p:pois){
+				System.out.printf("NAMA: %s\n", p.getName());
+			}
 		}else if(mode == PETUNJUK_ARAH){
 			
 		}
@@ -70,10 +72,6 @@ public class Activator implements BundleActivator {
 		Activator.context = null;
 	}
 	
-	public void sentCurrentLocation(BundleContext bundleContext){
-		contextmanagerServiceReference= bundleContext.getServiceReference(ContextManager.class.getName());
-	    ContextManager contextManagerService =(ContextManager)bundleContext.getService(contextmanagerServiceReference);
-	    contextManagerService.setCurrentLocation(gps.getCurrentPosition());
-	}
+	
 
 }
