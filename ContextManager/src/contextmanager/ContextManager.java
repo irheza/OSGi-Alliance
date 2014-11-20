@@ -9,4 +9,5 @@ public interface ContextManager {
 	public PlaceOfInterest getSinglePOI(String id);
 	public String getCompassDirective(PlaceOfInterest from, PlaceOfInterest to);
 	public String setCurrentLocation(String location);
+	public String getCurrentLocationPosition();
 }

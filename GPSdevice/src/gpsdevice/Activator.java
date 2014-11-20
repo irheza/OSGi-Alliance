@@ -1,5 +1,7 @@
 package gpsdevice;
 
+import java.util.Scanner;
+
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
@@ -31,12 +33,19 @@ public class Activator implements BundleActivator {
 		System.out.println("E. Exit");
 		gps = new GPSImpl();
 		gps.start();
-		while(true)
+		Scanner input = new Scanner(System.in);
+		if(input.next().equalsIgnoreCase("1"))
 		{
-			System.out.println("Posisi sekarang : "+gps.getCurrentPosition());
 			gps.move();
-			Thread.sleep(5000);    	
+			gps.move();
+			gps.move();
+			gps.move();
+			sentCurrentLocation(bundleContext);
+			contextmanagerServiceReference= bundleContext.getServiceReference(ContextManager.class.getName());
+		    ContextManager contextManagerService =(ContextManager)bundleContext.getService(contextmanagerServiceReference);
+			System.out.println("Lokasi dari contextManager: "+contextManagerService.getCurrentLocationPosition());
 		}
+		
 		
 	}
 

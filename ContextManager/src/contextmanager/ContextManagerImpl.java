@@ -51,4 +51,10 @@ public class ContextManagerImpl implements ContextManager{
 		return null;
 	}
 
+	@Override
+	public String getCurrentLocationPosition() {
+		// TODO Auto-generated method stub
+		return currentLocation;
+	}
+
 }
