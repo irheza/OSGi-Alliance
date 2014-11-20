@@ -8,52 +8,38 @@ import org.osgi.framework.ServiceRegistration;
 import sensor.Sensor;
 
 public class Activator implements BundleActivator {
-	 ServiceReference sensorServiceReference;
-<<<<<<< HEAD
-	 ContextManager server;
-	 Thread contextFetcher;
-=======
-	 ContextManagerImpl server;
-	 ServiceRegistration contextServiceRegistration;
->>>>>>> branch 'master' of https://github.com/irheza/OSGi-Alliance.git
+	ServiceReference sensorServiceReference;
+	ContextManager server;
+	Thread contextFetcher;
+	ServiceRegistration contextServiceRegistration;
+
 	/*
 	 * (non-Javadoc)
-	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
+	 * 
+	 * @see
+	 * org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext
+	 * )
 	 */
 	public void start(BundleContext context) throws Exception {
 		System.out.println("Hello World!!");
 		server = new ContextManagerImpl();
-<<<<<<< HEAD
-		
+
 		contextFetcher = new Thread(new ContextFetcher(context, server));
 		contextFetcher.start();
-=======
 		ContextManager contextService = new ContextManagerImpl();
-	    contextServiceRegistration =context.registerService(ContextManager.class.getName(), contextService, null);
->>>>>>> branch 'master' of https://github.com/irheza/OSGi-Alliance.git
-		
+		contextServiceRegistration = context.registerService(
+				ContextManager.class.getName(), contextService, null);
+
 	}
-	
+
 	/*
 	 * (non-Javadoc)
-	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
+	 * 
+	 * @see
+	 * org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
 		System.out.println("Goodbye World!!");
-<<<<<<< HEAD
-=======
-		 contextServiceRegistration.unregister();
+		contextServiceRegistration.unregister();
 	}
-	
-	public void getDataSensor(BundleContext context)
-	{
-		
-		sensorServiceReference= context.getServiceReference(Sensor.class.getName());
-	    Sensor sensorService =(Sensor)context.getService(sensorServiceReference);
-	    server.setCuaca(sensorService.getCuaca());
-	    server.setSuhu(sensorService.getSuhu());
-	    server.setTime(sensorService.getTime());
->>>>>>> branch 'master' of https://github.com/irheza/OSGi-Alliance.git
-	}
-
 }

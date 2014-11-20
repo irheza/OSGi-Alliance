@@ -10,15 +10,12 @@ public class ContextManagerImpl implements ContextManager{
 	private int suhu;
 	private String cuaca;
 	private String time;
-<<<<<<< HEAD
 	
 	public ContextManagerImpl() {
 		map = new Map("map.csv");
 	}
-	
-=======
 	private String currentLocation;
->>>>>>> branch 'master' of https://github.com/irheza/OSGi-Alliance.git
+	
 	@Override
 	public ArrayList<PlaceOfInterest> getCurrentLocationInfo(String location) {
 		return map.getByLocation(location);
