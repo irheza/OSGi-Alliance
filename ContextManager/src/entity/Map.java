@@ -63,8 +63,6 @@ public class Map {
             ArrayList<PlaceOfInterest> currPlaces = places.get(location);
             currPlaces.add(poi);
             places.put(location, currPlaces);
-            
-            System.out.println(poi.toString());
         }
     }
     

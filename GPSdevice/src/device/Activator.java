@@ -4,6 +4,7 @@ import entity.PlaceOfInterest;
 import gps.*;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Scanner;
 
 import org.osgi.framework.BundleActivator;
@@ -54,9 +55,17 @@ public class Activator implements BundleActivator {
 			System.out.println("Lokasi dari contextManager: "+contextManagerService.getCurrentLocationPosition());
 		}else if(mode == TEMPAT_MENARIK_LOKASI_SKRG){
 			ArrayList<PlaceOfInterest> pois = gps.getCurrentLocationPOI(bundleContext, contextmanagerServiceReference);
-			for(PlaceOfInterest p:pois){
-				System.out.printf("NAMA: %s\n", p.getName());
+			
+			for(int i = 0; i<pois.size();i++){
+				System.out.printf("%d NAMA: %s\n", i+1, pois.get(i).getName());
 			}
+			
+			System.out.println("pilih poi: ");
+			int poiSelected = input.nextInt()-1;
+			
+			PlaceOfInterest poi = pois.get(poiSelected);
+			
+			System.out.println(poi.toString());
 		}else if(mode == PETUNJUK_ARAH){
 			
 		}
