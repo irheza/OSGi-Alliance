@@ -80,6 +80,7 @@ public class Activator implements BundleActivator {
 			//System.out.println("Lokasi dari contextManager: "
 			//		+ contextManagerService.getCurrentLocationPosition());
 			//anggep nama tempat tidak mempunyai spasi 
+			System.out.print("Masukkan nama tempat yang ingin dicari informasinya: ");
 			String namatempat = reader.readLine();
 			System.out.println(contextManagerService.getByName(namatempat));
 		} else if (mode == TEMPAT_MENARIK_LOKASI_SKRG) {
