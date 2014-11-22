@@ -36,17 +36,11 @@ public class MainMenu {
 		ServiceReference flagServiceReference= bundleContext.getServiceReference(ContextManager.class.getName());
 		ContextManager flag =(ContextManager)bundleContext.getService(flagServiceReference);   
 		flag.setFlag("menu");
-		System.out.println(flag.getFlag());
-		System.out.println("Main menu : " + reader.toString());
 		int mode = Integer.parseInt(reader.readLine().trim());
 	
 		if(flag.getFlag().equals("menu"))
 		{
 			if (mode == INFO_TEMPAT_MENARIK) {
-				//System.out.println("Lokasi dari contextManager: "
-				//		+ contextManagerService.getCurrentLocationPosition());
-				//anggep nama tempat tidak mempunyai spasi 
-				//System.out.print("apa sih");
 				System.out.print("Masukkan nama tempat yang ingin dicari informasinya: ");
 				String namatempat = reader.readLine();
 				System.out.println(contextManagerService.getByName(namatempat));
@@ -93,6 +87,22 @@ public class MainMenu {
 			{
 				toMainMenu(contextManagerService,bundleContext,reader, gps,contextmanagerServiceReference );
 			}
+		}
+		else
+		{
+			String[] suggested =flag.getSuggestedPlace();
+			ArrayList<PlaceOfInterest> pois = gps.getCurrentLocationPOI(
+					bundleContext, contextmanagerServiceReference);
+
+			PlaceOfInterest tempatnya = flag.getByName(suggested[mode-1]);
+			System.out.println(tempatnya.getInformation());
+			System.out.println("Tekan 'B' untuk kembali ke menu utama");
+			String pilihan = reader.readLine();
+			if(pilihan.equalsIgnoreCase("B"))
+			{
+				toMainMenu(contextManagerService,bundleContext,reader, gps,contextmanagerServiceReference );
+			}
+
 		}
 	
 	

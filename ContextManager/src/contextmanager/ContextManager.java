@@ -102,7 +102,7 @@ public interface ContextManager {
 	public String getFlag();
 	public void setFlag(String flag);
 	public void sendSuggestion(String whichContext, BufferedReader reader) throws IOException;
-	
+	public String[] getSuggestedPlace();
 	/**
 	 * Sets the preferences repository reference.
 	 *

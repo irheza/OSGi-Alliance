@@ -29,6 +29,7 @@ public class ContextManagerImpl implements ContextManager {
 	/** The cuaca. */
 	private String cuaca = "";
 	String flag;
+	public String [] suggestedPlace;
 	
 	/** The time. */
 	private String time = "";
@@ -203,22 +204,10 @@ public class ContextManagerImpl implements ContextManager {
 		for(String s : suggested){
 			System.out.println(choice+". "+s);
 		}
+		this.suggestedPlace = suggested;
 		System.out.println("B. Back");
 		flag="preference";
-		System.out.println(flag);
-	    if(flag.equals("preference"))
-	    {
-			String optionChoose = readFromSystem();
-			
-			if(optionChoose.equalsIgnoreCase("B")){
-				
-			}
-			else{
-				System.out.println("yey");
-				int index = Integer.parseInt(optionChoose);
-				getPlaceInformation(suggested[index]);
-			}
-	    }
+
 	}
 	
 	private String readFromSystem() throws IOException{
@@ -244,6 +233,12 @@ public class ContextManagerImpl implements ContextManager {
 		// TODO Auto-generated method stub
 		this.flag= flag;
 		
+	}
+
+	@Override
+	public String[] getSuggestedPlace() {
+		// TODO Auto-generated method stub
+		return suggestedPlace;
 	}
 	
 }
