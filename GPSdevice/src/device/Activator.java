@@ -43,7 +43,7 @@ public class Activator implements BundleActivator {
 	}
 
 	/*
-	 * (non-Javadoc)
+	 * Fungsi yang akan menjalankan menu utama
 	 * 
 	 * @see
 	 * org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext

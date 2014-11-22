@@ -32,13 +32,11 @@ public class MainMenu {
 		System.out.println("1. Cari informasi mengenai sebuah tempat menarik");
 		System.out.println("2. Cari tempat menarik di lokasi sekarang");
 		System.out.println("3. Berikan petunjuk arah menuju sebuah tempat");
-		System.out.println("E. Exit");
-		ServiceReference flagServiceReference= bundleContext.getServiceReference(ContextManager.class.getName());
-		ContextManager flag =(ContextManager)bundleContext.getService(flagServiceReference);   
-		flag.setFlag("menu");
+		System.out.println("E. Exit");	
+		contextManagerService.setFlag("menu");
 		int mode = Integer.parseInt(reader.readLine().trim());
 	
-		if(flag.getFlag().equals("menu"))
+		if(contextManagerService.getFlag().equals("menu"))
 		{
 			if (mode == INFO_TEMPAT_MENARIK) {
 				System.out.print("Masukkan nama tempat yang ingin dicari informasinya: ");
@@ -88,18 +86,18 @@ public class MainMenu {
 				toMainMenu(contextManagerService,bundleContext,reader, gps,contextmanagerServiceReference );
 			}
 		}
+		//Jika ternyata sudah ada perubahan flag, sehingga yang diproses adalah preference
+		//getSuggestedPlace akan menghasilkan hasil karena sudah di set pada context manager
 		else
 		{
-			String[] suggested =flag.getSuggestedPlace();
-			ArrayList<PlaceOfInterest> pois = gps.getCurrentLocationPOI(
-					bundleContext, contextmanagerServiceReference);
-
-			PlaceOfInterest tempatnya = flag.getByName(suggested[mode-1]);
+			String[] suggested =contextManagerService.getSuggestedPlace();
+			PlaceOfInterest tempatnya = contextManagerService.getByName(suggested[mode-1]);
 			System.out.println(tempatnya.getInformation());
 			System.out.println("Tekan 'B' untuk kembali ke menu utama");
 			String pilihan = reader.readLine();
 			if(pilihan.equalsIgnoreCase("B"))
 			{
+				//menampilkan kembali menu utama
 				toMainMenu(contextManagerService,bundleContext,reader, gps,contextmanagerServiceReference );
 			}
 

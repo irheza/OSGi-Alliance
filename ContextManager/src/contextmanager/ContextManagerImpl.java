@@ -196,6 +196,10 @@ public class ContextManagerImpl implements ContextManager {
 		return false;
 	}
 	
+	//Fungsi ini akan mencetak tempat-tempat yang disarankan
+	//Fungsi ini juga akan menyimpan tempat-tempat yang disarankan sehingga
+	//saat dipanggil oleh MainMenu dimana flagnya sudah diubah, suggestedPlace sudah
+	//memiliki nilai
 	private void printSuggestionMessage(ArrayList<String> suggestionList) throws IOException{
 		String[] suggested =  new String[suggestionList.size()];
 		suggested = suggestionList.toArray(suggested);
@@ -205,23 +209,10 @@ public class ContextManagerImpl implements ContextManager {
 			System.out.println(choice+". "+s);
 		}
 		this.suggestedPlace = suggested;
-		System.out.println("B. Back");
 		flag="preference";
 
 	}
 	
-	private String readFromSystem() throws IOException{
-	
-		String result = reader.readLine();
-		return result;
-	}
-	
-	private void getPlaceInformation(String infoIndex){
-		PlaceOfInterest place = map.getByName(infoIndex);
-		System.out.println(place.getName());
-		System.out.println(place.getInformation());
-	}
-
 	@Override
 	public String getFlag() {
 		// TODO Auto-generated method stub
