@@ -3,6 +3,8 @@ package gps;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
+import contextmanager.ContextManager;
+
 public class GPSFetcher implements Runnable {
 	GPS gps;
 	BundleContext bundleContext;
@@ -17,7 +19,10 @@ public class GPSFetcher implements Runnable {
 	public void run() {
 		while(true){
 			gps.move();
+			System.out.println("It's moving, such wow, magic");
 			gps.sendCurrentLocation(bundleContext, gpsServiceReference);
+			ContextManager contextManagerService = (ContextManager) bundleContext.getService(gpsServiceReference);
+			contextManagerService.sendSuggestion();
 	    	try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {

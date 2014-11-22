@@ -2,6 +2,9 @@ package contextmanager;
 
 import java.util.ArrayList;
 
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
+
 import entity.PlaceOfInterest;
 import entity.RowColLocation;
 
@@ -16,4 +19,6 @@ public interface ContextManager {
 	public String setCurrentLocation(String location);
 	public String getCurrentLocationPosition();
 	public PlaceOfInterest getByName(String name);
+	public void sendSuggestion();
+	public void setPreferencesRepositoryReference(BundleContext context, ServiceReference preferencesRepoReference);
 }

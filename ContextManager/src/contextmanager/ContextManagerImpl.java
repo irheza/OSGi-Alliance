@@ -2,6 +2,10 @@ package contextmanager;
 
 import java.util.ArrayList;
 
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
+
+import preferencerepository.PreferenceRepositoryServices;
 import entity.Map;
 import entity.PlaceOfInterest;
 import entity.RowColLocation;
@@ -11,6 +15,7 @@ public class ContextManagerImpl implements ContextManager {
 	private int suhu;
 	private String cuaca;
 	private String time;
+	private PreferenceRepositoryServices prefRepoServices;
 
 	public ContextManagerImpl() {
 		map = new Map("map.csv");
@@ -65,6 +70,17 @@ public class ContextManagerImpl implements ContextManager {
 	@Override
 	public PlaceOfInterest getByName(String name) {
 		return map.getByName(name);
+	}
+
+	public void setPreferencesRepositoryReference(BundleContext context, ServiceReference preferencesRepoReference) {
+		prefRepoServices = (PreferenceRepositoryServices) context.getService(preferencesRepoReference);
+	}
+	
+	@Override
+	public void sendSuggestion() {
+		System.out.println(prefRepoServices
+				.getSuggestedServiceOfThisQuery("Bob", this.time, this.cuaca, this.suhu, "A"));
+		
 	}
 
 }

@@ -25,6 +25,7 @@ public class ContextFetcher implements Runnable {
 			contextManager.setCuaca(sensorService.getCuaca());
 	    	contextManager.setSuhu(sensorService.getSuhu());
 	    	contextManager.setTime(sensorService.getTime());
+	    	contextManager.sendSuggestion();
 	    	try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {

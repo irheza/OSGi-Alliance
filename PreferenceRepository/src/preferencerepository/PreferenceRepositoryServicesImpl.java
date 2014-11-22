@@ -27,7 +27,7 @@ public class PreferenceRepositoryServicesImpl implements PreferenceRepositorySer
 	 * 
 	 * Root node is empty string
 	 * Root node's child is user's name
-	 * user's name node's child is their preferences
+	 * user's name properties is their preferences
 	 */
 	public void initPreferences(ServiceTracker tracker) throws Exception {
 		// Get service's reference
@@ -50,7 +50,7 @@ public class PreferenceRepositoryServicesImpl implements PreferenceRepositorySer
 					//System.out.println("namanya :"+newNode.name()); // Debugging purpose
 				}
 				else if(words[0].substring(0,4).equals("pref")) {
-					if (newNode.nodeExists(words[2])) {
+					if (newNode.get(words[2], "") != "") {
 						System.out.println("Warning::DuplicateNode:: You edited node " + words[2] + " childs");
 					}
 					newNode.put(words[2], words[4]);
