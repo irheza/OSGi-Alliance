@@ -29,8 +29,7 @@ public interface GPS {
 	 * @return the string
 	 */
 	public String move();
-	public String getFlag();
-	public void setFlag(String flag);
+
 	
 	/**
 	 * Gets the object lokasi.

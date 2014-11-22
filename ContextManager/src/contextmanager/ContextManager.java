@@ -98,6 +98,9 @@ public interface ContextManager {
 	 * Send suggestion.
 	 * @throws IOException 
 	 */
+	
+	public String getFlag();
+	public void setFlag(String flag);
 	public void sendSuggestion(String whichContext, BufferedReader reader) throws IOException;
 	
 	/**

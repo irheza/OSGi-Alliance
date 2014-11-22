@@ -20,7 +20,7 @@ public class GPSImpl implements GPS {
 	
 	/** The current position. */
 	Location currentPosition;
-	String flag;
+
 	/** The peta. */
 	Graph peta;
     
@@ -161,15 +161,5 @@ public class GPSImpl implements GPS {
 		return contextManagerService.getCompassDirective(locDef.get(currentPosition.getKordinat()), contextManagerService.getByName(to));
 	}
 
-	@Override
-	public String getFlag() {
-		// TODO Auto-generated method stub
-		return flag;
-	}
-	
-	@Override
-	public void setFlag(String flag) {
-		// TODO Auto-generated method stub
-		this.flag=flag;
-	}
+
 }

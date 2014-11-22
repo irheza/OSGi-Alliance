@@ -9,7 +9,6 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
 import preferencerepository.PreferenceRepositoryServices;
-
 import entity.Map;
 import entity.PlaceOfInterest;
 import entity.RowColLocation;
@@ -29,6 +28,7 @@ public class ContextManagerImpl implements ContextManager {
 	
 	/** The cuaca. */
 	private String cuaca = "";
+	String flag;
 	
 	/** The time. */
 	private String time = "";
@@ -204,33 +204,25 @@ public class ContextManagerImpl implements ContextManager {
 			System.out.println(choice+". "+s);
 		}
 		System.out.println("B. Back");
-		
-	//	ServiceReference gpsServiceReference= context.getServiceReference(GPS.class.getName());
-	   // GPS gps =(GPS)context.getService(gpsServiceReference);   
-	  //  gps.setFlag("preference");
-	  //  System.out.println(gps.getFlag());
-	  //  if(gps.getFlag().equals("preference"))
-	  //  {
+		flag="preference";
+		System.out.println(flag);
+	    if(flag.equals("preference"))
+	    {
 			String optionChoose = readFromSystem();
 			
 			if(optionChoose.equalsIgnoreCase("B")){
 				
 			}
 			else{
+				System.out.println("yey");
 				int index = Integer.parseInt(optionChoose);
 				getPlaceInformation(suggested[index]);
 			}
-	 //   }
+	    }
 	}
 	
 	private String readFromSystem() throws IOException{
-		//BufferedReader reader =  new BufferedReader(new InputStreamReader(System.in));
-		
-		System.out.println("Readfrom system : " + reader.toString());
-		//reader.close();
-		System.out.println("Readfrom system2 : ");
-		reader =  new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("Readfrom system3 : " + reader.toString());
+	
 		String result = reader.readLine();
 		return result;
 	}
@@ -239,6 +231,19 @@ public class ContextManagerImpl implements ContextManager {
 		PlaceOfInterest place = map.getByName(infoIndex);
 		System.out.println(place.getName());
 		System.out.println(place.getInformation());
+	}
+
+	@Override
+	public String getFlag() {
+		// TODO Auto-generated method stub
+		return flag;
+	}
+
+	@Override
+	public void setFlag(String flag) {
+		// TODO Auto-generated method stub
+		this.flag= flag;
+		
 	}
 	
 }

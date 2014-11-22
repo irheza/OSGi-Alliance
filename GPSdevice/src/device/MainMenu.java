@@ -33,11 +33,14 @@ public class MainMenu {
 		System.out.println("2. Cari tempat menarik di lokasi sekarang");
 		System.out.println("3. Berikan petunjuk arah menuju sebuah tempat");
 		System.out.println("E. Exit");
-		gps.setFlag("menu");
+		ServiceReference flagServiceReference= bundleContext.getServiceReference(ContextManager.class.getName());
+		ContextManager flag =(ContextManager)bundleContext.getService(flagServiceReference);   
+		flag.setFlag("menu");
+		System.out.println(flag.getFlag());
 		System.out.println("Main menu : " + reader.toString());
 		int mode = Integer.parseInt(reader.readLine().trim());
 	
-		if(gps.getFlag().equals("menu"))
+		if(flag.getFlag().equals("menu"))
 		{
 			if (mode == INFO_TEMPAT_MENARIK) {
 				//System.out.println("Lokasi dari contextManager: "
@@ -91,6 +94,7 @@ public class MainMenu {
 				toMainMenu(contextManagerService,bundleContext,reader, gps,contextmanagerServiceReference );
 			}
 		}
+	
 	
 	}
 }
