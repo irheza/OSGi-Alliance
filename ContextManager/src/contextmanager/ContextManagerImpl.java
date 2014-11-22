@@ -38,7 +38,6 @@ public class ContextManagerImpl implements ContextManager {
 	private String currentLocation = "";
 	public BundleContext context;
 	
-	BufferedReader reader;
 	
 	/** The pref repo services. */
 	private PreferenceRepositoryServices prefRepoServices;
@@ -141,14 +140,19 @@ public class ContextManagerImpl implements ContextManager {
 	 * @see contextmanager.ContextManager#sendSuggestion()
 	 */
 	@Override
-	public void sendSuggestion(String whichContext, BufferedReader reader) throws IOException {
-		this.reader=reader;
+	public void sendSuggestion(String whichContext) {
+
 		if(whichContext.equals("GPS")){
 			System.out.println("Selamat datang di "+ this.currentLocation);
 			ArrayList<String> serviceSuggested = prefRepoServices
 				.getSuggestedServiceOfThisQuery("Bob", this.time, this.cuaca, this.suhu, this.currentLocation);
 			if(!serviceSuggested.isEmpty()){
-				checkSuggestionPlace();
+				try {
+					checkSuggestionPlace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 			}
 		}
@@ -201,16 +205,19 @@ public class ContextManagerImpl implements ContextManager {
 	//saat dipanggil oleh MainMenu dimana flagnya sudah diubah, suggestedPlace sudah
 	//memiliki nilai
 	private void printSuggestionMessage(ArrayList<String> suggestionList) throws IOException{
-		String[] suggested =  new String[suggestionList.size()];
-		suggested = suggestionList.toArray(suggested);
-		System.out.println("Berdasarkan preferensi anda, tempat-tempat berikut menarik untuk dikunjungi. Silahkan pilih salah satu untuk mendapatkan informasi lebih lanjut:");
-		int choice = 1;
-		for(String s : suggested){
-			System.out.println(choice+". "+s);
+		//Hanya tercetak jika user berada pada menu utama
+		if(!flag.equals("supermenu")){
+			String[] suggested =  new String[suggestionList.size()];
+			suggested = suggestionList.toArray(suggested);
+			System.out.println("Berdasarkan preferensi anda, tempat-tempat berikut menarik untuk dikunjungi. Silahkan pilih salah satu untuk mendapatkan informasi lebih lanjut:");
+			int choice = 1;
+			for(String s : suggested){
+				System.out.println(choice+". "+s);
+				choice++;
+			}
+			this.suggestedPlace = suggested;
+			flag="preference";
 		}
-		this.suggestedPlace = suggested;
-		flag="preference";
-
 	}
 	
 	@Override

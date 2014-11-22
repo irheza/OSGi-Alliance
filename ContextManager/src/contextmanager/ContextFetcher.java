@@ -42,20 +42,19 @@ public class ContextFetcher implements Runnable {
 	 */
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		
 		while(true){
 			contextManager.setCuaca(sensorService.getCuaca());
 	    	contextManager.setSuhu(sensorService.getSuhu());
 	    	contextManager.setTime(sensorService.getTime());
-	    	if(canMove)
-			{
-				//contextManager.sendSuggestion("Sensor");
-			}
-			else
-			{
-				canMove=true;
-			}
+//	    	if(canMove)
+//			{
+//				//contextManager.sendSuggestion("Sensor");
+//			}
+//			else
+//			{
+//				canMove=true;
+//			}
 	    	
 	    	try {
 				Thread.sleep(5000);

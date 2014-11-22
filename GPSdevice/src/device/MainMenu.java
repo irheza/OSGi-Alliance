@@ -39,10 +39,14 @@ public class MainMenu {
 		if(contextManagerService.getFlag().equals("menu"))
 		{
 			if (mode == INFO_TEMPAT_MENARIK) {
+				contextManagerService.setFlag("menusuper");
 				System.out.print("Masukkan nama tempat yang ingin dicari informasinya: ");
 				String namatempat = reader.readLine();
 				System.out.println(contextManagerService.getByName(namatempat));
 			} else if (mode == TEMPAT_MENARIK_LOKASI_SKRG) {
+				//flag menusuper digunakan agar preference place tidak dapat keluar setelah
+				//memilih salah satu fungsi pada menu utama
+				contextManagerService.setFlag("menusuper");
 				ArrayList<PlaceOfInterest> pois = gps.getCurrentLocationPOI(
 						bundleContext, contextmanagerServiceReference);
 	
@@ -59,6 +63,7 @@ public class MainMenu {
 					System.out.println(poi.toString());
 				}
 			} else if (mode == PETUNJUK_ARAH) {
+				contextManagerService.setFlag("menusuper");
 				System.out.println("sebut nama tempat yang mau dicari:");
 	
 				String toStr = reader.readLine();
