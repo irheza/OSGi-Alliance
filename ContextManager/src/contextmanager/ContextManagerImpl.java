@@ -134,5 +134,6 @@ public class ContextManagerImpl implements ContextManager {
 	public void sendSuggestion(String whichContext) {
 		System.out.println(prefRepoServices
 				.getSuggestedServiceOfThisQuery("Bob", this.time, this.cuaca, this.suhu, this.currentLocation));
+		
 	}
 }
