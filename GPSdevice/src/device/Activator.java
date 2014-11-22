@@ -77,8 +77,11 @@ public class Activator implements BundleActivator {
 		int mode = Integer.parseInt(reader.readLine().trim());
 
 		if (mode == INFO_TEMPAT_MENARIK) {
-			System.out.println("Lokasi dari contextManager: "
-					+ contextManagerService.getCurrentLocationPosition());
+			//System.out.println("Lokasi dari contextManager: "
+			//		+ contextManagerService.getCurrentLocationPosition());
+			//anggep nama tempat tidak mempunyai spasi 
+			String namatempat = reader.readLine();
+			System.out.println(contextManagerService.getByName(namatempat));
 		} else if (mode == TEMPAT_MENARIK_LOKASI_SKRG) {
 			ArrayList<PlaceOfInterest> pois = gps.getCurrentLocationPOI(
 					bundleContext, contextmanagerServiceReference);
