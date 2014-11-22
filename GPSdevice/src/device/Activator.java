@@ -4,8 +4,10 @@ import entity.PlaceOfInterest;
 import gps.*;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
@@ -60,13 +62,6 @@ public class Activator implements BundleActivator {
 		contextmanagerServiceReference = bundleContext.getServiceReference(ContextManager.class.getName());
 		ContextManager contextManagerService = (ContextManager) bundleContext.getService(contextmanagerServiceReference);
 		System.out.println("CMService GPS :" + contextManagerService.toString());
-		System.out.println("Selamat datang di Location-Aware Tour Guide");
-		System.out.println("");
-		System.out.println("Silahkan masukkan pilihan anda:");
-		System.out.println("1. Cari informasi mengenai sebuah tempat menarik");
-		System.out.println("2. Cari tempat menarik di lokasi sekarang");
-		System.out.println("3. Berikan petunjuk arah menuju sebuah tempat");
-		System.out.println("E. Exit");
 		gps = new GPSImpl();
 		gps.start();
 		gpsFetcher = new Thread(new GPSFetcher(bundleContext, gps));
@@ -74,6 +69,23 @@ public class Activator implements BundleActivator {
 
 		BufferedReader reader = new BufferedReader(new InputStreamReader(
 				System.in));
+		toMainMenu(contextManagerService,bundleContext,reader);
+
+	}
+	
+	/*
+	 * fungsi untuk memanggil halaman depan dari aplikasi Location-Aware Tour Guide
+	 * 
+	 */
+	public void toMainMenu(ContextManager contextManagerService,BundleContext bundleContext,BufferedReader reader) throws IOException
+	{
+		System.out.println("Selamat datang di Location-Aware Tour Guide");
+		System.out.println("");
+		System.out.println("Silahkan masukkan pilihan anda:");
+		System.out.println("1. Cari informasi mengenai sebuah tempat menarik");
+		System.out.println("2. Cari tempat menarik di lokasi sekarang");
+		System.out.println("3. Berikan petunjuk arah menuju sebuah tempat");
+		System.out.println("E. Exit");
 		int mode = Integer.parseInt(reader.readLine().trim());
 
 		if (mode == INFO_TEMPAT_MENARIK) {
@@ -119,7 +131,12 @@ public class Activator implements BundleActivator {
 				System.out.println("lokasi tidak ditemukan");
 			}
 		}
-
+		System.out.println("Tekan 'B' untuk kembali ke menu utama");
+		String pilihan = reader.readLine();
+		if(pilihan.equalsIgnoreCase("B"))
+		{
+			toMainMenu(contextManagerService,bundleContext,reader);
+		}
 	}
 
 	/*
