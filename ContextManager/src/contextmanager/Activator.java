@@ -8,11 +8,25 @@ import org.osgi.framework.ServiceRegistration;
 import preferencerepository.PreferenceRepositoryServices;
 import sensor.Sensor;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Activator.
+ */
 public class Activator implements BundleActivator {
+	
+	/** The sensor service reference. */
 	ServiceReference sensorServiceReference;
+	
+	/** The preferences repo reference. */
 	ServiceReference preferencesRepoReference;
+	
+	/** The server. */
 	ContextManager server;
+	
+	/** The context fetcher. */
 	Thread contextFetcher;
+	
+	/** The context service registration. */
 	ServiceRegistration contextServiceRegistration;
 
 	/*
