@@ -15,13 +15,12 @@ public class ContextManagerImpl implements ContextManager {
 	private int suhu;
 	private String cuaca;
 	private String time;
+	private String currentLocation;
 	private PreferenceRepositoryServices prefRepoServices;
 
 	public ContextManagerImpl() {
 		map = new Map("map.csv");
 	}
-
-	private String currentLocation;
 
 	@Override
 	public ArrayList<PlaceOfInterest> getCurrentLocationInfo(String location) {
@@ -79,7 +78,7 @@ public class ContextManagerImpl implements ContextManager {
 	@Override
 	public void sendSuggestion() {
 		System.out.println(prefRepoServices
-				.getSuggestedServiceOfThisQuery("Bob", this.time, this.cuaca, this.suhu, "A"));
+				.getSuggestedServiceOfThisQuery("Bob", this.time, this.cuaca, this.suhu, this.currentLocation));
 		
 	}
 

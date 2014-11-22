@@ -86,35 +86,47 @@ public class PreferenceRepositoryServicesImpl implements PreferenceRepositorySer
 		temp[3] = Integer.toString(temperature);
 		temp[4] = location;
 		
-		ArrayList<String> notDistinct = new ArrayList<String>();
-		try {
-			if (preferences.nodeExists(temp[0])) {
-				Preferences parentNode = preferences.node(temp[0]);
-				if (parentNode.get(temp[1], "") != "") {
-					notDistinct.add(parentNode.get(temp[1], ""));
-				}
-				if (parentNode.get(temp[2], "") != "") {
-					notDistinct.add(parentNode.get(temp[2], ""));
-				}
-				if (parentNode.get(temp[3], "") != "") {
-					notDistinct.add(parentNode.get(temp[3], ""));
-				}
-				if (parentNode.get(temp[4], "") != "") {
-					notDistinct.add(parentNode.get(temp[4], ""));
-				}
-			} else {
-				System.out.println("Your requested user doesn't has preferences yet, please contact our administrator.");
+		// null catcher
+		boolean notNull = true;
+		for (int i = 0; i < 5; i++) {
+			if (temp[i] == null) {
+				notNull = false;
 			}
-		} catch (BackingStoreException e1) {
-			e1.printStackTrace();
 		}
 		
-		if (notDistinct.size() != 0) {
-			for (int i = 0; i < notDistinct.size(); i++) {
-				if (!ret.contains(notDistinct.get(i))) {
-					ret.add(notDistinct.get(i));
+		if (notNull) {
+			ArrayList<String> notDistinct = new ArrayList<String>();
+			try {
+				if (preferences.nodeExists(temp[0])) {
+					Preferences parentNode = preferences.node(temp[0]);
+					if (parentNode.get(temp[1], "") != "") {
+						notDistinct.add(parentNode.get(temp[1], ""));
+					}
+					if (parentNode.get(temp[2], "") != "") {
+						notDistinct.add(parentNode.get(temp[2], ""));
+					}
+					if (parentNode.get(temp[3], "") != "") {
+						notDistinct.add(parentNode.get(temp[3], ""));
+					}
+					if (parentNode.get(temp[4], "") != "") {
+						notDistinct.add(parentNode.get(temp[4], ""));
+					}
+				} else {
+					System.out.println("Your requested user doesn't has preferences yet, please contact our administrator.");
+				}
+			} catch (BackingStoreException e1) {
+				e1.printStackTrace();
+			}
+			
+			if (notDistinct.size() != 0) {
+				for (int i = 0; i < notDistinct.size(); i++) {
+					if (!ret.contains(notDistinct.get(i))) {
+						ret.add(notDistinct.get(i));
+					}
 				}
 			}
+		} else {
+			ret.add("Either one or more of your inputted argument(s) is null!");
 		}
 
 		return ret;
