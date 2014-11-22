@@ -1,5 +1,6 @@
 package contextmanager;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -97,7 +98,7 @@ public interface ContextManager {
 	 * Send suggestion.
 	 * @throws IOException 
 	 */
-	public void sendSuggestion(String whichContext) throws IOException;
+	public void sendSuggestion(String whichContext, BufferedReader reader) throws IOException;
 	
 	/**
 	 * Sets the preferences repository reference.

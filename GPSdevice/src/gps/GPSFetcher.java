@@ -1,9 +1,11 @@
 package gps;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
+
 
 
 
@@ -17,6 +19,7 @@ public class GPSFetcher implements Runnable {
 	boolean canMove=false;
 	/** The bundle context. */
 	BundleContext bundleContext;
+	BufferedReader reader;
 	
 	/** The gps service reference. */
 	ServiceReference gpsServiceReference;
@@ -27,10 +30,11 @@ public class GPSFetcher implements Runnable {
 	 * @param bundleContext the bundle context
 	 * @param gps the gps
 	 */
-	public GPSFetcher(BundleContext bundleContext,GPS gps)
+	public GPSFetcher(BundleContext bundleContext,GPS gps, BufferedReader reader)
 	{
 		this.gps= gps;
 		this.bundleContext = bundleContext;
+		this.reader = reader;
 	}
 
 	/* (non-Javadoc)
@@ -45,7 +49,7 @@ public class GPSFetcher implements Runnable {
 			ContextManager contextManagerService = (ContextManager) bundleContext.getService(gpsServiceReference);
 			try {
 				if(canMove){
-					contextManagerService.sendSuggestion("GPS");
+					contextManagerService.sendSuggestion("GPS",reader);
 				}
 				else
 				{

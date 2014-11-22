@@ -48,18 +48,13 @@ public class ContextFetcher implements Runnable {
 			contextManager.setCuaca(sensorService.getCuaca());
 	    	contextManager.setSuhu(sensorService.getSuhu());
 	    	contextManager.setTime(sensorService.getTime());
-	    	try {
-	    		if(canMove)
-	    		{
-	    			contextManager.sendSuggestion("Sensor");
-	    		}
-	    		else
-	    		{
-	    			canMove=true;
-	    		}
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+	    	if(canMove)
+			{
+				//contextManager.sendSuggestion("Sensor");
+			}
+			else
+			{
+				canMove=true;
 			}
 	    	
 	    	try {

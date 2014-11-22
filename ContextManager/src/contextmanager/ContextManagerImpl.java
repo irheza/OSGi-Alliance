@@ -9,9 +9,11 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
 import preferencerepository.PreferenceRepositoryServices;
+
 import entity.Map;
 import entity.PlaceOfInterest;
 import entity.RowColLocation;
+
 
 // TODO: Auto-generated Javadoc
 /**
@@ -33,6 +35,9 @@ public class ContextManagerImpl implements ContextManager {
 	
 	/** The current location. */
 	private String currentLocation = "";
+	public BundleContext context;
+	
+	BufferedReader reader;
 	
 	/** The pref repo services. */
 	private PreferenceRepositoryServices prefRepoServices;
@@ -127,6 +132,7 @@ public class ContextManagerImpl implements ContextManager {
 	 * @see contextmanager.ContextManager#setPreferencesRepositoryReference(org.osgi.framework.BundleContext, org.osgi.framework.ServiceReference)
 	 */
 	public void setPreferencesRepositoryReference(BundleContext context, ServiceReference preferencesRepoReference) {
+		this.context =context;
 		prefRepoServices = (PreferenceRepositoryServices) context.getService(preferencesRepoReference);
 	}
 	
@@ -134,7 +140,8 @@ public class ContextManagerImpl implements ContextManager {
 	 * @see contextmanager.ContextManager#sendSuggestion()
 	 */
 	@Override
-	public void sendSuggestion(String whichContext) throws IOException {
+	public void sendSuggestion(String whichContext, BufferedReader reader) throws IOException {
+		this.reader=reader;
 		if(whichContext.equals("GPS")){
 			System.out.println("Selamat datang di "+ this.currentLocation);
 			ArrayList<String> serviceSuggested = prefRepoServices
@@ -159,6 +166,7 @@ public class ContextManagerImpl implements ContextManager {
 				placeName.add(place.getName());
 			}
 		}
+		if(!placeName.isEmpty())
 		printSuggestionMessage(placeName);	
 	}
 	
@@ -197,20 +205,32 @@ public class ContextManagerImpl implements ContextManager {
 		}
 		System.out.println("B. Back");
 		
-		String optionChoose = readFromSystem();
-		
-		if(optionChoose.equalsIgnoreCase("B")){
+	//	ServiceReference gpsServiceReference= context.getServiceReference(GPS.class.getName());
+	   // GPS gps =(GPS)context.getService(gpsServiceReference);   
+	  //  gps.setFlag("preference");
+	  //  System.out.println(gps.getFlag());
+	  //  if(gps.getFlag().equals("preference"))
+	  //  {
+			String optionChoose = readFromSystem();
 			
-		}
-		else{
-			int index = Integer.parseInt(optionChoose);
-			getPlaceInformation(suggested[index]);
-		}
-		
+			if(optionChoose.equalsIgnoreCase("B")){
+				
+			}
+			else{
+				int index = Integer.parseInt(optionChoose);
+				getPlaceInformation(suggested[index]);
+			}
+	 //   }
 	}
 	
 	private String readFromSystem() throws IOException{
-		BufferedReader reader =  new BufferedReader(new InputStreamReader(System.in));
+		//BufferedReader reader =  new BufferedReader(new InputStreamReader(System.in));
+		
+		System.out.println("Readfrom system : " + reader.toString());
+		//reader.close();
+		System.out.println("Readfrom system2 : ");
+		reader =  new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Readfrom system3 : " + reader.toString());
 		String result = reader.readLine();
 		return result;
 	}
