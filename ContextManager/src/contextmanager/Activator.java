@@ -6,11 +6,11 @@ import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
 
 import preferencerepository.PreferenceRepositoryServices;
-import sensor.Sensor;
 
 public class Activator implements BundleActivator {
 	ServiceReference sensorServiceReference;
 	ServiceReference preferencesRepoReference;
+	ServiceReference gps;
 	ContextManager server;
 	Thread contextFetcher;
 	ServiceRegistration contextServiceRegistration;
@@ -27,13 +27,12 @@ public class Activator implements BundleActivator {
 		
 		preferencesRepoReference = context.getServiceReference(PreferenceRepositoryServices.class.getName());
 		server.setPreferencesRepositoryReference(context, preferencesRepoReference);
-
+		
 		contextFetcher = new Thread(new ContextFetcher(context, server));
 		contextFetcher.start();
 		
-		ContextManager contextService = new ContextManagerImpl();
 		contextServiceRegistration = context.registerService(
-				ContextManager.class.getName(), contextService, null);
+				ContextManager.class.getName(), server, null);
 
 	}
 

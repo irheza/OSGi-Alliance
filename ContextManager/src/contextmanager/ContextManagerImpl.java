@@ -12,10 +12,10 @@ import entity.RowColLocation;
 
 public class ContextManagerImpl implements ContextManager {
 	Map map;
-	private int suhu;
-	private String cuaca;
-	private String time;
-	private String currentLocation;
+	private int suhu = Integer.MAX_VALUE;
+	private String cuaca = "";
+	private String time = "";
+	private String currentLocation = "";
 	private PreferenceRepositoryServices prefRepoServices;
 
 	public ContextManagerImpl() {
@@ -76,10 +76,8 @@ public class ContextManagerImpl implements ContextManager {
 	}
 	
 	@Override
-	public void sendSuggestion() {
+	public void sendSuggestion(String whichContext) {
 		System.out.println(prefRepoServices
 				.getSuggestedServiceOfThisQuery("Bob", this.time, this.cuaca, this.suhu, this.currentLocation));
-		
 	}
-
 }

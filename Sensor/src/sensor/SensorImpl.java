@@ -31,5 +31,4 @@ public class SensorImpl implements Sensor {
 		
 		return df.format(calendar.getTime());
 	}
-
 }

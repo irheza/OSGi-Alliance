@@ -6,14 +6,10 @@ import gps.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Scanner;
-
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
-import contextmanager.ContextFetcher;
 import contextmanager.ContextManager;
 
 public class Activator implements BundleActivator {
@@ -40,6 +36,9 @@ public class Activator implements BundleActivator {
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
+		contextmanagerServiceReference = bundleContext.getServiceReference(ContextManager.class.getName());
+		ContextManager contextManagerService = (ContextManager) bundleContext.getService(contextmanagerServiceReference);
+		System.out.println("CMService GPS :" + contextManagerService.toString());
 		System.out.println("Selamat datang di Location-Aware Tour Guide");
 		System.out.println("");
 		System.out.println("Silahkan masukkan pilihan anda:");
@@ -57,11 +56,6 @@ public class Activator implements BundleActivator {
 		int mode = Integer.parseInt(reader.readLine().trim());
 
 		if (mode == INFO_TEMPAT_MENARIK) {
-
-			contextmanagerServiceReference = bundleContext
-					.getServiceReference(ContextManager.class.getName());
-			ContextManager contextManagerService = (ContextManager) bundleContext
-					.getService(contextmanagerServiceReference);
 			System.out.println("Lokasi dari contextManager: "
 					+ contextManagerService.getCurrentLocationPosition());
 		} else if (mode == TEMPAT_MENARIK_LOKASI_SKRG) {

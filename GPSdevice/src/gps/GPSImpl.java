@@ -126,5 +126,4 @@ public class GPSImpl implements GPS {
 		
 		return contextManagerService.getCompassDirective(locDef.get(currentPosition.getKordinat()), contextManagerService.getByName(to));
 	}
-
 }

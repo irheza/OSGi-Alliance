@@ -7,8 +7,8 @@ import org.osgi.framework.ServiceRegistration;
 public class SensorActivator implements BundleActivator  {
     ServiceRegistration sensorServiceRegistration;
     public void start(BundleContext context) throws Exception {
-        Sensor helloService = new SensorImpl();
-        sensorServiceRegistration =context.registerService(Sensor.class.getName(), helloService, null);
+        Sensor sersorService = new SensorImpl();
+        sensorServiceRegistration =context.registerService(Sensor.class.getName(), sersorService, null);
         
     }
     public void stop(BundleContext context) throws Exception {

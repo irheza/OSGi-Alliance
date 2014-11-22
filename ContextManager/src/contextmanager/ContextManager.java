@@ -19,6 +19,6 @@ public interface ContextManager {
 	public String setCurrentLocation(String location);
 	public String getCurrentLocationPosition();
 	public PlaceOfInterest getByName(String name);
-	public void sendSuggestion();
+	public void sendSuggestion(String whichContext);
 	public void setPreferencesRepositoryReference(BundleContext context, ServiceReference preferencesRepoReference);
 }
