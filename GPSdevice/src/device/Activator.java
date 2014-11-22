@@ -12,17 +12,38 @@ import org.osgi.framework.ServiceReference;
 
 import contextmanager.ContextManager;
 
+// TODO: Auto-generated Javadoc
 public class Activator implements BundleActivator {
+	
+	/** The constant for tempat menarik. */
 	final int INFO_TEMPAT_MENARIK = 1;
+	
+	/** The constant for tempat menarik lokasi skrg. */
 	final int TEMPAT_MENARIK_LOKASI_SKRG = 2;
+	
+	/** The constant for petunjuk arah. */
 	final int PETUNJUK_ARAH = 3;
 
+	/** The reader. */
 	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	
+	/** The gps fetcher. */
 	Thread gpsFetcher;
+	
+	/** The contextmanager service reference. */
 	ServiceReference contextmanagerServiceReference;
+	
+	/** The context. */
 	private static BundleContext context;
+	
+	/** The gps. */
 	GPS gps;
 
+	/**
+	 * Gets the context.
+	 *
+	 * @return the context
+	 */
 	static BundleContext getContext() {
 		return context;
 	}

@@ -12,11 +12,24 @@ import entity.PlaceOfInterest;
 import entity.RowColLocation;
 import map.*;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GPSImpl.
+ */
 public class GPSImpl implements GPS {
+	
+	/** The current position. */
 	Location currentPosition;
+	
+	/** The peta. */
 	Graph peta;
+    
+    /** The loc def. */
     private Hashtable<String, RowColLocation> locDef;
     
+    /**
+     * Instantiates a new GPS impl.
+     */
     public GPSImpl(){
     	locDef = new Hashtable<String, RowColLocation>(); 
         locDef.put("A", new RowColLocation(0,1));
@@ -30,6 +43,9 @@ public class GPSImpl implements GPS {
         locDef.put("I", new RowColLocation(3,2));
     }
     
+	/* (non-Javadoc)
+	 * @see gps.GPS#getCurrentPosition()
+	 */
 	@Override
 	public String getCurrentPosition() {
 		// TODO Auto-generated method stub
@@ -38,6 +54,9 @@ public class GPSImpl implements GPS {
 	
 	
 	
+	/* (non-Javadoc)
+	 * @see gps.GPS#start()
+	 */
 	@Override
 	public void start() {
 		ArrayList<Location> listLokasi = new ArrayList<Location>();
@@ -74,6 +93,9 @@ public class GPSImpl implements GPS {
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see gps.GPS#move()
+	 */
 	@Override
 	public String move() {
 		Random rand = new Random();
@@ -86,12 +108,18 @@ public class GPSImpl implements GPS {
 		return currentPosition.getKordinat();
 	}
 
+	/* (non-Javadoc)
+	 * @see gps.GPS#getObjectLokasi()
+	 */
 	@Override
 	public Location getObjectLokasi() {
 		// TODO Auto-generated method stub
 		return currentPosition;
 	}
 
+	/* (non-Javadoc)
+	 * @see gps.GPS#sendCurrentLocation(org.osgi.framework.BundleContext, org.osgi.framework.ServiceReference)
+	 */
 	public void sendCurrentLocation(BundleContext bundleContext,
 			ServiceReference<?> contextmanagerServiceReference) {
 		contextmanagerServiceReference = bundleContext
@@ -101,6 +129,9 @@ public class GPSImpl implements GPS {
 		contextManagerService.setCurrentLocation(getCurrentPosition());
 	}
 
+	/* (non-Javadoc)
+	 * @see gps.GPS#getCurrentLocationPOI(org.osgi.framework.BundleContext, org.osgi.framework.ServiceReference)
+	 */
 	@Override
 	public ArrayList<PlaceOfInterest> getCurrentLocationPOI(
 			BundleContext bundleContext,
@@ -113,6 +144,9 @@ public class GPSImpl implements GPS {
 				.getCurrentLocationInfo(getCurrentPosition());
 	}
 
+	/* (non-Javadoc)
+	 * @see gps.GPS#getCompassDirective(org.osgi.framework.BundleContext, org.osgi.framework.ServiceReference, java.lang.String)
+	 */
 	@Override
 	public String getCompassDirective(
 			BundleContext bundleContext,

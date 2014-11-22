@@ -8,23 +8,49 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+// TODO: Auto-generated Javadoc
 /**
- *
+ * Represents the Map entity. This class contains info of all POI
+ * that GPS can query.
  * @author Johanes
  */
 public class Map {
+    
+    /** The places. */
     private Hashtable<String, ArrayList<PlaceOfInterest>> places;
+    
+    /** The reader. */
     private BufferedReader reader;
+    
+    /** The map location. */
     private String mapLocation = "";
+    
+    /** The loc def. */
     private Hashtable<String, RowColLocation> locDef;
     
+    /** The Constant ID_INDEX. */
     final static int ID_INDEX = 0;
+    
+    /** The Constant ROW_INDEX. */
     final static int ROW_INDEX = 1;
+    
+    /** The Constant COL_INDEX. */
     final static int COL_INDEX = 2;
+    
+    /** The Constant LOCATION_INDEX. */
     final static int LOCATION_INDEX = 3;
+    
+    /** The Constant NAME_INDEX. */
     final static int NAME_INDEX = 4;
+    
+    /** The Constant INFORMATION_INDEX. */
     final static int INFORMATION_INDEX = 5;
     
+    /**
+     * Instantiates a new map.
+     *
+     * @param mapLocation the map location
+     */
     public Map(String mapLocation) {
         this.mapLocation = mapLocation;
         places = new Hashtable<String, ArrayList<PlaceOfInterest>>();
@@ -60,6 +86,11 @@ public class Map {
         
     }
 
+    /**
+     * Parses the map line.
+     *
+     * @param line the line
+     */
     private void parseMapLine(String line) {
         String[] str = line.split(",");
         if (str.length >= 5) {
@@ -80,10 +111,22 @@ public class Map {
         }
     }
     
+    /**
+     * Gets the by location.
+     *
+     * @param location the location
+     * @return the by location
+     */
     public ArrayList<PlaceOfInterest> getByLocation(String location){
         return places.get(location);
     }
     
+    /**
+     * Gets the by id.
+     *
+     * @param id the id
+     * @return the by id
+     */
     public PlaceOfInterest getByID(String id){
     	for(ArrayList<PlaceOfInterest> pois : places.values()){
     		for(int i=0;i<pois.size();i++){
@@ -95,6 +138,12 @@ public class Map {
     	return null;
     }
     
+    /**
+     * Gets the by name.
+     *
+     * @param name the name
+     * @return the by name
+     */
     public PlaceOfInterest getByName(String name){
     	for(ArrayList<PlaceOfInterest> pois : places.values()){
     		for(int i=0;i<pois.size();i++){
@@ -106,6 +155,13 @@ public class Map {
     	return null;
     }
     
+    /**
+     * Gets the compass directive.
+     *
+     * @param from the from
+     * @param to the to
+     * @return the compass directive
+     */
     public static String getCompassDirective(RowColLocation from, PlaceOfInterest to){
         if(from.getRow()==to.getRow()){
             if(from.getCol()>to.getCol()){
@@ -139,6 +195,13 @@ public class Map {
         return null;
     }
     
+    /**
+     * Gets the compass directive.
+     *
+     * @param from the from
+     * @param to the to
+     * @return the compass directive
+     */
     public static String getCompassDirective(PlaceOfInterest from, PlaceOfInterest to){
         if(from.getRow()==to.getRow()){
             if(from.getCol()>to.getCol()){

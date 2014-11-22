@@ -6,16 +6,33 @@ import org.osgi.framework.ServiceReference;
 
 import contextmanager.ContextManager;
 
+// TODO: Auto-generated Javadoc
 public class GPSFetcher implements Runnable {
+	
+	/** The gps. */
 	GPS gps;
+	
+	/** The bundle context. */
 	BundleContext bundleContext;
+	
+	/** The gps service reference. */
 	ServiceReference gpsServiceReference;
+	
+	/**
+	 * Instantiates a new GPS fetcher.
+	 *
+	 * @param bundleContext the bundle context
+	 * @param gps the gps
+	 */
 	public GPSFetcher(BundleContext bundleContext,GPS gps)
 	{
 		this.gps= gps;
 		this.bundleContext = bundleContext;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
 	@Override
 	public void run() {
 		while(true){

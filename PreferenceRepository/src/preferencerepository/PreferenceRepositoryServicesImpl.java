@@ -10,16 +10,19 @@ import org.osgi.service.prefs.Preferences;
 import org.osgi.service.prefs.PreferencesService;
 import org.osgi.util.tracker.ServiceTracker;
 
+// TODO: Auto-generated Javadoc
 /**
  * Class implementation of PreferenceRepository
- * this class implement service for calling bundles
- * 
- * @author Natanael Taufik
+ * this class implement service for calling bundles.
  *
+ * @author Natanael Taufik
  */
 public class PreferenceRepositoryServicesImpl implements PreferenceRepositoryServices {
 	
+	/** The service. */
 	private PreferencesService service;
+	
+	/** The preferences. */
 	private Preferences preferences;
 	
 	/**
@@ -27,7 +30,10 @@ public class PreferenceRepositoryServicesImpl implements PreferenceRepositorySer
 	 * 
 	 * Root node is empty string
 	 * Root node's child is user's name
-	 * user's name properties is their preferences
+	 * user's name properties is their preferences.
+	 *
+	 * @param tracker the tracker
+	 * @throws Exception the exception
 	 */
 	public void initPreferences(ServiceTracker tracker) throws Exception {
 		// Get service's reference
@@ -68,10 +74,14 @@ public class PreferenceRepositoryServicesImpl implements PreferenceRepositorySer
 	
 	/**
 	 * Service for calling bundles
-	 * This method process query and determine the output based on user's preferences
-	 * 
+	 * This method process query and determine the output based on user's preferences.
+	 *
 	 * @param name the name of user, time current time, weather current weather
 	 * temperature current temperature, location current location
+	 * @param time the time
+	 * @param weather the weather
+	 * @param temperature the temperature
+	 * @param location the location
 	 * @return ArrayList of string, consist of preferred service from IoI based on preferences data
 	 */
 	@Override
@@ -133,15 +143,15 @@ public class PreferenceRepositoryServicesImpl implements PreferenceRepositorySer
 	}
 
 	/**
-	 * Clean service
+	 * Clean service.
 	 */
 	public void cleanPreferencesService() {
 		service = null;
 	}
 
 	/**
-	 * Check whether a string is an integer
-	 * 
+	 * Check whether a string is an integer.
+	 *
 	 * @param s string input
 	 * @return true if an integer, false if a string
 	 */
