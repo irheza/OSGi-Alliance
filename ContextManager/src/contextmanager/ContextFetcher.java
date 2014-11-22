@@ -12,7 +12,7 @@ import sensor.Sensor;
  * The Class ContextFetcher.
  */
 public class ContextFetcher implements Runnable {
-	
+	boolean canMove=false;
 	/** The bundle context. */
 	BundleContext bundleContext;
 	
@@ -49,7 +49,14 @@ public class ContextFetcher implements Runnable {
 	    	contextManager.setSuhu(sensorService.getSuhu());
 	    	contextManager.setTime(sensorService.getTime());
 	    	try {
-				contextManager.sendSuggestion("Sensor");
+	    		if(canMove)
+	    		{
+	    			contextManager.sendSuggestion("Sensor");
+	    		}
+	    		else
+	    		{
+	    			canMove=true;
+	    		}
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

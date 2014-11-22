@@ -1,7 +1,10 @@
 package gps;
 
+import java.io.IOException;
+
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
+
 
 
 import contextmanager.ContextManager;
@@ -11,7 +14,7 @@ public class GPSFetcher implements Runnable {
 	
 	/** The gps. */
 	GPS gps;
-	
+	boolean canMove=false;
 	/** The bundle context. */
 	BundleContext bundleContext;
 	
@@ -40,7 +43,19 @@ public class GPSFetcher implements Runnable {
 			gps.sendCurrentLocation(bundleContext, gpsServiceReference);
 			gpsServiceReference= bundleContext.getServiceReference(ContextManager.class.getName());
 			ContextManager contextManagerService = (ContextManager) bundleContext.getService(gpsServiceReference);
-			contextManagerService.sendSuggestion("GPS");
+			try {
+				if(canMove){
+					contextManagerService.sendSuggestion("GPS");
+				}
+				else
+				{
+					canMove=true;
+				}
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 	    	try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
