@@ -1,5 +1,7 @@
 package contextmanager;
 
+import java.io.IOException;
+
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
@@ -46,7 +48,13 @@ public class ContextFetcher implements Runnable {
 			contextManager.setCuaca(sensorService.getCuaca());
 	    	contextManager.setSuhu(sensorService.getSuhu());
 	    	contextManager.setTime(sensorService.getTime());
-	    	contextManager.sendSuggestion("Sensor");
+	    	try {
+				contextManager.sendSuggestion("Sensor");
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	
 	    	try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {

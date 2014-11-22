@@ -178,7 +178,6 @@ public class ContextManagerImpl implements ContextManager {
 				for(String x: serviceWanted){
 					if(s.equals(x)){
 						compareList.add(s);
-						System.out.println(s);
 						if(!compareList.isEmpty())  return true;
 					}
 				}
@@ -198,13 +197,28 @@ public class ContextManagerImpl implements ContextManager {
 		}
 		System.out.println("B. Back");
 		
-		BufferedReader reader =  new BufferedReader(new InputStreamReader(System.in));
-		String optionChoose = reader.readLine();
+		String optionChoose = readFromSystem();
+		
+		if(optionChoose.equalsIgnoreCase("B")){
+			
+		}
+		else{
+			int index = Integer.parseInt(optionChoose);
+			getPlaceInformation(suggested[index]);
+		}
 		
 	}
 	
+	private String readFromSystem() throws IOException{
+		BufferedReader reader =  new BufferedReader(new InputStreamReader(System.in));
+		String result = reader.readLine();
+		return result;
+	}
+	
 	private void getPlaceInformation(String infoIndex){
-		
+		PlaceOfInterest place = map.getByName(infoIndex);
+		System.out.println(place.getName());
+		System.out.println(place.getInformation());
 	}
 	
 }

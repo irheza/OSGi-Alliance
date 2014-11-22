@@ -1,5 +1,6 @@
 package contextmanager;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.osgi.framework.BundleContext;
@@ -94,8 +95,9 @@ public interface ContextManager {
 	
 	/**
 	 * Send suggestion.
+	 * @throws IOException 
 	 */
-	public void sendSuggestion(String whichContext);
+	public void sendSuggestion(String whichContext) throws IOException;
 	
 	/**
 	 * Sets the preferences repository reference.
