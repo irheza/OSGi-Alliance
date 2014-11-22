@@ -49,18 +49,15 @@ public class Activator implements BundleActivator {
 		System.out.println("E. Exit");
 		gps = new GPSImpl();
 		gps.start();
+		gpsFetcher = new Thread(new GPSFetcher(bundleContext, gps));
+		gpsFetcher.start();
 
 		BufferedReader reader = new BufferedReader(new InputStreamReader(
 				System.in));
 		int mode = Integer.parseInt(reader.readLine().trim());
 
 		if (mode == INFO_TEMPAT_MENARIK) {
-			gps.move();
-			gps.move();
-			gps.move();
-			gps.move();
-			gps.sendCurrentLocation(bundleContext,
-					contextmanagerServiceReference);
+
 			contextmanagerServiceReference = bundleContext
 					.getServiceReference(ContextManager.class.getName());
 			ContextManager contextManagerService = (ContextManager) bundleContext
@@ -74,8 +71,7 @@ public class Activator implements BundleActivator {
 			for (int i = 0; i < pois.size(); i++) {
 				System.out
 						.printf("%d NAMA: %s\n", i + 1, pois.get(i).getName());
-				gpsFetcher = new Thread(new GPSFetcher(bundleContext, gps));
-				gpsFetcher.start();
+
 
 				System.out.println("pilih poi: ");
 				int poiSelected = Integer.parseInt(reader.readLine().trim()) - 1;
