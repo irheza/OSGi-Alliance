@@ -106,7 +106,15 @@ public class Activator implements BundleActivator {
 			String cd = gps.getCompassDirective(bundleContext,
 					contextmanagerServiceReference, toStr);
 			if (cd != null) {
-				System.out.println(cd);
+				//jika tempat yang dicari berada di posisi anda saat ini
+				if(cd.equals("POSISI SAMA"))
+				{
+					System.out.println(toStr+" berada di lokasi anda sekarang.");
+				}
+				else
+				{
+					System.out.println(toStr+" berada di "+cd+ " dari lokasi anda sekarang.");
+				}
 			} else {
 				System.out.println("lokasi tidak ditemukan");
 			}

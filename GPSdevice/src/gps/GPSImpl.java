@@ -156,7 +156,7 @@ public class GPSImpl implements GPS {
 		ContextManager contextManagerService = (ContextManager) bundleContext
 				.getService(contextmanagerServiceReference);
 		
-		System.out.println("CURRENT POSITION: "+locDef.get(currentPosition.getKordinat()));
+		//System.out.println("CURRENT POSITION: "+locDef.get(currentPosition.getKordinat()));
 		
 		return contextManagerService.getCompassDirective(locDef.get(currentPosition.getKordinat()), contextManagerService.getByName(to));
 	}
