@@ -1,5 +1,8 @@
 package contextmanager;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import org.osgi.framework.BundleContext;
@@ -131,9 +134,77 @@ public class ContextManagerImpl implements ContextManager {
 	 * @see contextmanager.ContextManager#sendSuggestion()
 	 */
 	@Override
-	public void sendSuggestion(String whichContext) {
-		System.out.println(prefRepoServices
-				.getSuggestedServiceOfThisQuery("Bob", this.time, this.cuaca, this.suhu, this.currentLocation));
+	public void sendSuggestion(String whichContext) throws IOException {
+		if(whichContext.equals("GPS")){
+			System.out.println("Selamat datang di "+ this.currentLocation);
+			ArrayList<String> serviceSuggested = prefRepoServices
+				.getSuggestedServiceOfThisQuery("Bob", this.time, this.cuaca, this.suhu, this.currentLocation);
+			if(!serviceSuggested.isEmpty()){
+				checkSuggestionPlace();
+				
+			}
+		}
 		
 	}
+	
+	private void checkSuggestionPlace() throws IOException{
+		ArrayList<PlaceOfInterest> interestingPlace = getCurrentLocationInfo(this.currentLocation);
+		PlaceOfInterest[] poi = new PlaceOfInterest[interestingPlace.size()];
+		poi = interestingPlace.toArray(poi);
+		
+		ArrayList<String> placeName = new ArrayList<String>();
+		
+		for(PlaceOfInterest place : poi){
+			if(checkServicePlace(place)){
+				placeName.add(place.getName());
+			}
+		}
+		printSuggestionMessage(placeName);	
+	}
+	
+	private boolean checkServicePlace(PlaceOfInterest place){
+		ArrayList<String> serviceOfferList =  place.getService();
+		String[] serviceList =  new String[serviceOfferList.size()];
+		serviceList = serviceOfferList.toArray(serviceList);
+		
+		ArrayList<String> serviceSuggested = prefRepoServices
+				.getSuggestedServiceOfThisQuery("Bob", this.time, this.cuaca, this.suhu, this.currentLocation);
+		String[] serviceWanted =  new String[serviceSuggested.size()];
+		serviceWanted = serviceSuggested.toArray(serviceList);
+		
+		ArrayList<String> compareList = new ArrayList<String>();
+		if(!serviceOfferList.isEmpty()){
+			for(String s : serviceList){
+				for(String x: serviceWanted){
+					if(s.equals(x)){
+						compareList.add(s);
+						System.out.println(s);
+						if(!compareList.isEmpty())  return true;
+					}
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	private void printSuggestionMessage(ArrayList<String> suggestionList) throws IOException{
+		String[] suggested =  new String[suggestionList.size()];
+		suggested = suggestionList.toArray(suggested);
+		System.out.println("Berdasarkan preferensi anda, tempat-tempat berikut menarik untuk dikunjungi. Silahkan pilih salah satu untuk mendapatkan informasi lebih lanjut:");
+		int choice = 1;
+		for(String s : suggested){
+			System.out.println(choice+". "+s);
+		}
+		System.out.println("B. Back");
+		
+		BufferedReader reader =  new BufferedReader(new InputStreamReader(System.in));
+		String optionChoose = reader.readLine();
+		
+	}
+	
+	private void getPlaceInformation(String infoIndex){
+		
+	}
+	
 }
