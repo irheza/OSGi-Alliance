@@ -2,3 +2,11 @@ name: Bob
 pref-1: jika 25 sarankan renang
 pref-2: jika hujan sarankan bioskop
 pref-3: jika 12:00 sarankan restoran
+name: Falena
+pref-1: jika 2 sarankan renang
+pref-2: jika cerah sarankan gondola
+pref-3: jika 09:00 sarankan Gym
+name: Giant
+pref-1: jika 35 sarankan warnet
+pref-2: jika berawan sarankan karaoke
+pref-3: jika 20:00 sarankan hotel

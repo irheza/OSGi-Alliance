@@ -49,7 +49,6 @@ public class SensorImpl implements Sensor {
 	public String getTime() {
 		Calendar calendar = Calendar.getInstance();
 		SimpleDateFormat df = new SimpleDateFormat("HH:mm");
-		
 		return df.format(calendar.getTime());
 	}
 }

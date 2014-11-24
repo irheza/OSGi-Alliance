@@ -28,7 +28,7 @@ public class ContextManagerImpl implements ContextManager {
 	
 	/** The cuaca. */
 	private String cuaca = "";
-	String flag;
+	String flag = "init";
 	public String [] suggestedPlace;
 	
 	/** The time. */
@@ -36,6 +36,11 @@ public class ContextManagerImpl implements ContextManager {
 	
 	/** The current location. */
 	private String currentLocation = "";
+	
+	/** The current user .*/
+	public String deviceUser="";
+	private boolean thereIsUser=false;
+	
 	public BundleContext context;
 	
 	
@@ -141,13 +146,16 @@ public class ContextManagerImpl implements ContextManager {
 	 */
 	@Override
 	public void sendSuggestion(String whichContext) {
-
-		if(whichContext.equals("GPS")){
+			System.out.println("");
 			System.out.println("Selamat datang di "+ this.currentLocation);
+			System.out.println("Waktu menunjukkan pukul "+ this.time);
+			System.out.println("Cuaca saat ini adalah "+ this.cuaca+" dengan suhu "+ this.suhu+ " derajat celcius");
 			ArrayList<String> serviceSuggested = prefRepoServices
-				.getSuggestedServiceOfThisQuery("Bob", this.time, this.cuaca, this.suhu, this.currentLocation);
+				.getSuggestedServiceOfThisQuery(this.deviceUser, this.time, this.cuaca, this.suhu, this.currentLocation);
+			
 			if(!serviceSuggested.isEmpty()){
 				try {
+					setFlag("preference");
 					checkSuggestionPlace();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -155,7 +163,6 @@ public class ContextManagerImpl implements ContextManager {
 				}
 				
 			}
-		}
 		
 	}
 	
@@ -181,7 +188,7 @@ public class ContextManagerImpl implements ContextManager {
 		serviceList = serviceOfferList.toArray(serviceList);
 		
 		ArrayList<String> serviceSuggested = prefRepoServices
-				.getSuggestedServiceOfThisQuery("Bob", this.time, this.cuaca, this.suhu, this.currentLocation);
+				.getSuggestedServiceOfThisQuery(this.deviceUser, this.time, this.cuaca, this.suhu, this.currentLocation);
 		String[] serviceWanted =  new String[serviceSuggested.size()];
 		serviceWanted = serviceSuggested.toArray(serviceList);
 		
@@ -206,9 +213,10 @@ public class ContextManagerImpl implements ContextManager {
 	//memiliki nilai
 	private void printSuggestionMessage(ArrayList<String> suggestionList) throws IOException{
 		//Hanya tercetak jika user berada pada menu utama
-		if(!flag.equals("supermenu")){
+		if(!flag.equals("menu")){
 			String[] suggested =  new String[suggestionList.size()];
 			suggested = suggestionList.toArray(suggested);
+			System.out.println(this.flag);
 			System.out.println("Berdasarkan preferensi anda, tempat-tempat berikut menarik untuk dikunjungi. Silahkan pilih salah satu untuk mendapatkan informasi lebih lanjut:");
 			int choice = 1;
 			for(String s : suggested){
@@ -216,7 +224,6 @@ public class ContextManagerImpl implements ContextManager {
 				choice++;
 			}
 			this.suggestedPlace = suggested;
-			flag="preference";
 		}
 	}
 	
@@ -238,5 +245,36 @@ public class ContextManagerImpl implements ContextManager {
 		// TODO Auto-generated method stub
 		return suggestedPlace;
 	}
+
+	@Override
+	public String getUser() {
+		// TODO Auto-generated method stub
+		return this.deviceUser;
+	}
+
+	@Override
+	public void setUser(String user) {
+		// TODO Auto-generated method stub
+		this.deviceUser = user;
+	}
 	
+	
+	public void checkValidUser(String name){
+		this.deviceUser = name;
+		ArrayList<String> serviceSuggested = prefRepoServices
+				.getSuggestedServiceOfThisQuery(this.deviceUser, this.time, this.cuaca, this.suhu, this.currentLocation);
+			this.thereIsUser = prefRepoServices.isValidUser();
+	}
+	
+	public boolean isValidUser(){
+		return this.thereIsUser;
+	}
+	
+	public String getValidUser(){
+		return this.deviceUser;
+	}
+	
+	public String getCurrentLocation(){
+		return this.currentLocation;
+	}
 }

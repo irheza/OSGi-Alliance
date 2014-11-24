@@ -25,6 +25,8 @@ public class PreferenceRepositoryServicesImpl implements PreferenceRepositorySer
 	/** The preferences. */
 	private Preferences preferences;
 	
+	public boolean thereIsUser= false;
+	
 	/**
 	 * This method read preferences from file and input them to preferences
 	 * 
@@ -121,8 +123,10 @@ public class PreferenceRepositoryServicesImpl implements PreferenceRepositorySer
 					if (parentNode.get(temp[4], "") != "") {
 						notDistinct.add(parentNode.get(temp[4], ""));
 					}
+					this.thereIsUser=true;
 				} else {
 					System.out.println("Your requested user doesn't has preferences yet, please contact our administrator.");
+					this.thereIsUser=false;
 				}
 			} catch (BackingStoreException e1) {
 				e1.printStackTrace();
@@ -163,4 +167,9 @@ public class PreferenceRepositoryServicesImpl implements PreferenceRepositorySer
 	    }
 	    return true;
 	}
+	
+	public boolean isValidUser(){
+		return thereIsUser;
+	}
+	
 }

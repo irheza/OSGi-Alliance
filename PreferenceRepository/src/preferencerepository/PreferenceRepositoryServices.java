@@ -10,6 +10,8 @@ import java.util.ArrayList;
  */
 public interface PreferenceRepositoryServices {
 	
+	public static boolean thereIsUser = false;
+
 	/**
 	 * Gets the suggested service of this query.
 	 *
@@ -21,4 +23,6 @@ public interface PreferenceRepositoryServices {
 	 * @return the suggested service of this query
 	 */
 	public ArrayList<String> getSuggestedServiceOfThisQuery(String name, String time, String weather, int temperature, String location);
+
+	public boolean isValidUser();
 }

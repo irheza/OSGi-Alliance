@@ -103,6 +103,9 @@ public interface ContextManager {
 	public void setFlag(String flag);
 	public void sendSuggestion(String whichContext);
 	public String[] getSuggestedPlace();
+	public String getUser();
+	public void setUser(String user);
+	
 	/**
 	 * Sets the preferences repository reference.
 	 *
@@ -110,4 +113,11 @@ public interface ContextManager {
 	 * @param preferencesRepoReference the preferences repo reference
 	 */
 	public void setPreferencesRepositoryReference(BundleContext context, ServiceReference preferencesRepoReference);
+
+	public boolean isValidUser();
+
+	public void checkValidUser(String user);
+
+	public String getValidUser();
+
 }

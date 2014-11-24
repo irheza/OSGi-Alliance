@@ -1,3 +1,15 @@
-A001,0,1,A,taman bunga,informasi taman,gondola,bioskop
-A002,0,1,A,taman cinta,informasi taman cinta,gondola cinta,bioskop cinta
-A003,0,2,B,taman anggrek,info taman anggrek,bioskop,ice skating,restoran
+A001,0,1,A,Taman Bunga,Taman Bunga merupakan area publik yang dibangun pada tahun 1980 oleh almarhum Dr. Gerololo untuk mendiang istrinya Julianna.\n Taman ini memiliki koleksi bunga dari seluruh dunia dan ditetapkan sebagai kawasan perlindungan oleh pemerintah JakMania,gondola,observatorium,restoran,monumen nasional
+A002,0,1,A,Taman Cinta,Tempat ini hanya boleh dimasuki oleh orang-orang yang telah memiliki pasangan,Hotel,Bioskop,Karaoke,Kafe,Bar
+A003,0,2,B,Taman Anggrek,Sebuah mall yang terkenal dengan landmarknya sebuah Anggrek besar di atas pohon. Dibangun tahun 2001 dan sekarang menjadi favorit destinasi bagi kalangan cabe-cabean,bioskop,ice skating,restoran,supermarket,butik
+A004,0,2,B,DwiMangga,Sebuah lapangan besar yang dipenuhi dengan pedagang-pedagang garage sale untuk gadget-gadget terkini,warteg tenda biru,es pocong,toko gadget
+A005,0,2,B,Eclai'r, Pusat fashion terbesar dari kota jakmania lengkap dengan barang-barang kualitas bintang 5 cocok bagi fashionista,Chanel,Prada,butik-butik,restoran
+A006,1,0,C,KenapaIniTerjadi, Daerah yang tidak diketahui dan selalu dikelilingi oleh kejutan, restoran,renang,gym
+A007,1,1,D,Hutan Rimba,Hutan yang terletak di jantung kota Jakmania yang terkenal sebagai tempat outbound,gazebo,cabin,restoran,gondola
+A008,1,2,E,Cilecapi,Ini merupakan daerah perumahan bagi warga Jakmania yang suka kehidupan normal,Warteg SukaGratis, Betamart,Pertomino
+A009,1,2,E,Treno,Ini merupakan daerah perumahan bagi warga Jakmania yang suka seni,bioskop,renang,panggung sandiwara
+A010,2,2,F,Versian, daerah ini dikhususkan bagi atlit-atlit untuk berlatih,renang,gym,stadion,lapangan basket
+A011,2,2,F,Hollem, daerah ini dikhususkan bagi kaum yang malas bergerak,warnet,bioskop,rumah baca, hotel, restoran
+A012,2,3,G,Port de au,Pelabuhan dari Jakmania terkenal dengan kegiatan outbound air dan makanan seafood serta penadah barang curian, restoran, yacth club, pasar hitam, bea cukai
+A013,3,1,H,Laju Suara, Bagian dari dunia Hedonisme kota Jakmania dalam bidang tarik suara,opera house, karaoke putri syahdan, karaoke inul daramuda, panggung-panggungan, dangdut maniak,restoran
+A014,3,1,H,Laju Tari, Bagian dari dunia Hedonisme kota Jakmania dalam bidang gerakan,dance hall, club de franco, restoran, stadion
+A015,3,2,I,Impian jaya Susi, kawasan kota wisata buatan lengkap dengan taman bermain,DoFan, restoran, bioskop, seaworld,gondola

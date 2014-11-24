@@ -47,16 +47,13 @@ public class GPSFetcher implements Runnable {
 			gps.sendCurrentLocation(bundleContext, gpsServiceReference);
 			gpsServiceReference= bundleContext.getServiceReference(ContextManager.class.getName());
 			ContextManager contextManagerService = (ContextManager) bundleContext.getService(gpsServiceReference);
-			if(canMove){
+			
+			if(contextManagerService.getFlag().equals("idle")){
 				contextManagerService.sendSuggestion("GPS");
-			}
-			else
-			{
-				canMove=true;
 			}
 			
 	    	try {
-				Thread.sleep(5000);
+				Thread.sleep(7114);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

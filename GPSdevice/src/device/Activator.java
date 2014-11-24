@@ -53,8 +53,6 @@ public class Activator implements BundleActivator {
 		Activator.context = bundleContext;
 		contextmanagerServiceReference = bundleContext.getServiceReference(ContextManager.class.getName());
 		ContextManager contextManagerService = (ContextManager) bundleContext.getService(contextmanagerServiceReference);
-		BufferedReader reader = new BufferedReader(new InputStreamReader(
-				System.in));
 		gps = new GPSImpl();
 		gps.start();
 		gpsFetcher = new Thread(new GPSFetcher(bundleContext, gps,reader));
@@ -62,7 +60,7 @@ public class Activator implements BundleActivator {
 
 		
 		MainMenu menu = new MainMenu();
-		menu.toMainMenu(contextManagerService, bundleContext, reader, gps, contextmanagerServiceReference);
+		menu.toMainMenu(contextManagerService, bundleContext, reader, gps, contextmanagerServiceReference,"");
 
 	}
 

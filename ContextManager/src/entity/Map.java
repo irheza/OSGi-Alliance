@@ -101,7 +101,7 @@ public class Map {
 
             PlaceOfInterest poi = new PlaceOfInterest(id, row, col, str[NAME_INDEX], location, str[INFORMATION_INDEX]);
             ArrayList<String> services = new ArrayList<String>();
-            for (int i = 5; i < str.length; i++) {
+            for (int i = 6; i < str.length; i++) {
                 services.add(str[i]);
             }
             poi.setService(services);
